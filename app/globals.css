@@ -7,8 +7,12 @@
     --secondary-color-light: #FFF;
     --secondary-color-dark: #FFF;
     --border-grey: #c0c0c0;
-    --text-black-dark:#FFF;
-    --text-black-light:#FFF;
+    --text-black-dark: #2d2d2d;
+    --text-black-light1: #585858;
+    --text-black-light2: #7b7b7b;
+    --body-bg-start: #a0a6b2;
+    --body-bg-end: #dedede;
+    --main-bg-color:#EEEEEE;
 }
 
 
@@ -22,7 +26,13 @@
 
 body {
     font-size: 62.5%;
-    font-family: var(--font-roboto);
+    font-family: var(--font-inter);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: linear-gradient(to bottom right, var(--body-bg-start), var(--body-bg-end)) no-repeat;
+    min-height: 100vh;
 }
 
 a:link,
@@ -30,7 +40,17 @@ a:visited {
     text-decoration: none;
     color: inherit;
 }
-
+main{
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 1rem 0;
+    background-color: var(--main-bg-color);
+    padding: 1rem 3rem;
+    border-radius: 10px;
+}
 
 @media screen and (max-width: 600px) {
     body {
