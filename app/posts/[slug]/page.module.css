@@ -1,0 +1,38 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 1rem 1rem;
+    max-width:50rem;
+    border-style: solid;
+    padding: 1rem;
+    border-width: 1px;
+    border-color: var(--border-grey);
+    border-radius: 10px;
+}
+
+.post_title_text {
+    font-size: 2.2rem;
+    font-weight: 400;
+}
+.post_meta_container{
+    margin: .7rem 0;
+    font-size: .8rem;
+    color: var(--text-black-light2);
+}
+.image_container {
+    height: 20rem;
+}
+
+.image_container img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.post_descr{
+    font-size: 2rem;
+}
+.post_descr p{
+    font-size: 1rem;
+}

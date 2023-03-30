@@ -1,5 +1,5 @@
 import styles from './page.module.css'
-import PostCard from "@/app/post_card";
+import PostCard from "@/app/post_card/post_card";
 
 async function getPosts() {
     const response = await fetch('http://localhost:8080/api/posts');
@@ -16,9 +16,8 @@ export default async function Home() {
     return (
         <main>
             {posts && posts.map(post => (
-                <>
-                    <PostCard post={post} key={post.id}/>
-                </>
+                <PostCard post={post} createdDate={(new Date(post.time_created)).toLocaleDateString()} key={post.id}/>
+
             ))}
         </main>
     )
