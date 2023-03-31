@@ -2,6 +2,10 @@ import './globals.css'
 import {Inter, Roboto} from 'next/font/google';
 import Header from './header/header'
 import ComponentsWrapper from "@/app/ComponentsWrapper";
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 const inter = Inter({
     subsets: ['latin'],

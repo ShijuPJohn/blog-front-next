@@ -4,6 +4,7 @@ import styles from './header.module.css'
 import Link from "next/link";
 import {useDispatch, useSelector} from "react-redux";
 import {login, logout} from "../actions/userActions";
+import {enqueueSnackbar} from "notistack";
 
 
 const Header = () => {
@@ -11,6 +12,11 @@ const Header = () => {
     const [showSidebar, setShowSidebar] = useState(false);
     const {userInfo} = userLogin
     const dispatch = useDispatch();
+    useEffect(() => {
+        if (userInfo && Object.keys(userInfo).length === 0) {
+            enqueueSnackbar("Logged Out")
+        }
+    }, [userInfo])
     return (
         <header className={showSidebar ? `${styles.header} ${styles.show}` : `${styles.header} ${styles.hide}`}>
             {!showSidebar && <Link href={"/"}>
@@ -32,8 +38,8 @@ const Header = () => {
                     <li className={styles.main_nav_links_item}><Link href="/">Categories</Link></li>
                     <li className={styles.main_nav_links_item}><Link href="/about">About</Link></li>
                     <li className={styles.main_nav_links_item}><Link href="/">Contact</Link></li>
-                    {userInfo && Object.keys(userInfo).length!==0 ? <li className={styles.main_nav_links_item} onClick={() => {
-                            console.log('onclick triggered')
+                    {userInfo && Object.keys(userInfo).length !== 0 ?
+                        <li className={styles.main_nav_links_item} onClick={() => {
                             dispatch(logout())
                         }}>Logout</li> :
                         <li className={styles.main_nav_links_item}><Link href="/login">Login</Link></li>}

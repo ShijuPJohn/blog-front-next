@@ -1,11 +1,11 @@
 'use client';
 import React, {useEffect} from 'react';
-import styles from './page.module.css';
+import styles from '../login/page.module.css';
 import {Provider, useDispatch, useSelector} from "react-redux";
-import {login} from "../actions/userActions";
+import {signup} from "../actions/userActions";
 import store from "@/app/store";
 import {useRouter} from "next/navigation";
-import {SnackbarProvider, enqueueSnackbar} from 'notistack';
+import {enqueueSnackbar} from 'notistack';
 import {useForm} from "react-hook-form";
 import {Button, TextField} from "@mui/material";
 
@@ -17,10 +17,11 @@ const Page = () => {
     const {register, formState: {errors}, handleSubmit} = useForm();
 
     const onSubmit = async (data) => {
-        dispatch(login(data.email, data.password))
+        dispatch(signup(data.username, data.email, data.password))
     }
     useEffect(() => {
         if (userInfo && Object.keys(userInfo).length !== 0) {
+            enqueueSnackbar('Account Created', {variant: "success"})
             enqueueSnackbar('Logged In', {variant: "success"})
             router.push('/')
         }
@@ -30,8 +31,17 @@ const Page = () => {
         <Provider store={store}>
             <main className={styles.main}>
                 <div className={styles.main_container}>
-                    <h3 className={styles.signup_login_title}>Login</h3>
+                    <h3 className={styles.signup_login_title}>Sign Up</h3>
                     <form onSubmit={handleSubmit(onSubmit)} className={styles.login_signup_form}>
+                        <TextField
+                            className={styles.text_input_field}
+                            error={!!errors.username}
+                            helperText={errors.username ? 'Username Required' : ''}
+                            name={"username"}
+                            type={"text"}
+                            label={"USERNAME"}
+                            variant={"outlined"}
+                            {...register("usrname", {required: "Required"})}/>
                         <TextField
                             className={styles.text_input_field}
                             error={!!errors.email}
@@ -64,7 +74,7 @@ const Page = () => {
                         </div>
                     </form>
                     <div className={styles.grey_line}></div>
-                    <a href="/signup"><p className={styles.create_acc_login}>Create an account</p></a>
+                    <a href="/login"><p className={styles.create_acc_login}>Login with email and password?</p></a>
                 </div>
             </main>
         </Provider>

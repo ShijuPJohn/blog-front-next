@@ -10,6 +10,7 @@
     border-width: 1px;
     border-color: var(--border-grey);
     border-radius: 10px;
+    background-color: var(--main-bg-color);
 }
 
 .post_title_text {
