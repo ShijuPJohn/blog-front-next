@@ -56,3 +56,23 @@ export const loginThunk = (email, password) => async (dispatch) => {
         dispatch(loginFail())
     }
 }
+
+export const signupThunk = (username, email, password) => async (dispatch) => {
+    try {
+        dispatch(loginRequest())
+        const config = {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }
+        const {data} = await axios.post(
+            "http://localhost:8080/api/users",
+            {username, email, password},
+            config
+        )
+        dispatch(login(data))
+    } catch (e) {
+        dispatch(loginFail())
+    }
+}

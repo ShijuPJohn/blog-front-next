@@ -1,9 +1,8 @@
 'use client';
 import React, {useEffect} from 'react';
 import styles from '../login/page.module.css';
-import {Provider, useDispatch, useSelector} from "react-redux";
-import {signup} from "../actions/userActions";
-import store from "@/app/store";
+import {useDispatch, useSelector} from "react-redux";
+import {signupThunk} from "../reducers/user_slice";
 import {useRouter} from "next/navigation";
 import {enqueueSnackbar} from 'notistack';
 import {useForm} from "react-hook-form";
@@ -11,13 +10,13 @@ import {Button, TextField} from "@mui/material";
 
 const Page = () => {
     const userLogin = useSelector(state => state.user)
-    const {error, loading, userInfo} = userLogin
+    const {loading, userInfo} = userLogin
     const router = useRouter();
     const dispatch = useDispatch()
     const {register, formState: {errors}, handleSubmit} = useForm();
 
     const onSubmit = async (data) => {
-        dispatch(signup(data.username, data.email, data.password))
+        dispatch(signupThunk(data.username, data.email, data.password))
     }
     useEffect(() => {
         if (userInfo && Object.keys(userInfo).length !== 0) {
@@ -28,7 +27,6 @@ const Page = () => {
     }, [userLogin])
 
     return (
-        <Provider store={store}>
             <main className={styles.main}>
                 <div className={styles.main_container}>
                     <h3 className={styles.signup_login_title}>Sign Up</h3>
@@ -77,7 +75,6 @@ const Page = () => {
                     <a href="/login"><p className={styles.create_acc_login}>Login with email and password?</p></a>
                 </div>
             </main>
-        </Provider>
     );
 };
 
