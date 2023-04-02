@@ -1,10 +1,11 @@
-'use client'
+'use client';
 import React, {useEffect, useRef, useState} from 'react';
 import styles from './header.module.css'
 import Link from "next/link";
 import {useDispatch, useSelector} from "react-redux";
 import {login, logout} from "../actions/userActions";
 import {enqueueSnackbar} from "notistack";
+import AddIcon from '@mui/icons-material/Add';
 
 
 const Header = () => {
@@ -18,7 +19,7 @@ const Header = () => {
         }
     }, [userInfo])
     return (
-        <header className={showSidebar ? `${styles.header} ${styles.show}` : `${styles.header} ${styles.hide}`}>
+        <header className={showSidebar ? `${styles.header} ${styles.show}` : `${styles.header}`}>
             {!showSidebar && <Link href={"/"}>
                 <div className={styles.logo_box}>
                     <img src="/logo.png" alt="logo"/>
@@ -34,15 +35,17 @@ const Header = () => {
             </div>
             <nav className={`${styles.main_nav}`}>
                 <ul className={`${styles.main_nav_links}`}>
+                    {/*{userInfo && Object.keys(userInfo).length !== 0 ?*/}
+                    {/*    <li className={styles.main_nav_links_item}><Link href="/add-post"><AddIcon/></Link></li> : null}*/}
                     <li className={styles.main_nav_links_item}><Link href="/">Home</Link></li>
                     <li className={styles.main_nav_links_item}><Link href="/">Categories</Link></li>
                     <li className={styles.main_nav_links_item}><Link href="/about">About</Link></li>
                     <li className={styles.main_nav_links_item}><Link href="/">Contact</Link></li>
-                    {userInfo && Object.keys(userInfo).length !== 0 ?
-                        <li className={styles.main_nav_links_item} onClick={() => {
-                            dispatch(logout())
-                        }}>Logout</li> :
-                        <li className={styles.main_nav_links_item}><Link href="/login">Login</Link></li>}
+                    {/*{userInfo && Object.keys(userInfo).length !== 0 ?*/}
+                    {/*    <li className={styles.main_nav_links_item} onClick={() => {*/}
+                    {/*        dispatch(logout())*/}
+                    {/*    }}>Logout</li> :*/}
+                    {/*    <li className={styles.main_nav_links_item}><Link href="/login">Login</Link></li>}*/}
                 </ul>
             </nav>
         </header>

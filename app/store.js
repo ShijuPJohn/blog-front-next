@@ -1,33 +1,13 @@
-import {applyMiddleware, combineReducers, legacy_createStore as createStore} from "redux";
-import {composeWithDevTools} from "redux-devtools-extension";
-import thunk from "redux-thunk";
-import {userLoginReducer} from "./reducers/userLoginReducer";
+import {configureStore} from '@reduxjs/toolkit'
+import {userReducer} from './reducers/user_slice'
 
-const reducer = combineReducers({
-    user:userLoginReducer,
+const store = configureStore({
+    reducer: {
+        user: userReducer
+    }
 })
-function saveToLocalStorage(store) {
-    try {
-        const serializedStore = JSON.stringify(store);
-        window.localStorage.setItem("store", serializedStore);
-    } catch (e) {
-    }
-}
-
-function loadFromLocalStorage() {
-    try {
-        const serializedStore = window.localStorage.getItem("store");
-        if (serializedStore === null) return undefined;
-        return JSON.parse(serializedStore);
-    } catch (e) {
-        return undefined;
-    }
-}
-const initialState = loadFromLocalStorage()
-
-const middleware = [thunk]
-const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware))) //TODO createStore() is deprecated
-
-store.subscribe(() => saveToLocalStorage(store.getState()));
-
 export default store
+store.subscribe(() => {
+    console.log("store.getState()",store.getState())
+    localStorage.setItem('store', JSON.stringify(store.getState()))
+})
