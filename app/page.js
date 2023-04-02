@@ -14,7 +14,7 @@ export default async function Home() {
     const posts = await getPosts();
     console.log(posts)
     return (
-        <main>
+        <main className={styles.main}>
             {posts && posts.map(post => (
                 <PostCard post={post} createdDate={(new Date(post.time_created)).toLocaleDateString()} key={post.id}/>
 

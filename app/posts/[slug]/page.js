@@ -14,7 +14,7 @@ async function fetchPost(slug) {
 const Page = async ({params}) => {
     const post = await fetchPost(params.slug);
     return (
-        <main>
+        <main className={styles.main}>
             <h1 className={styles.post_title_text}>{post.title}</h1>
             <div className={styles.post_meta_container}>
                 <p className={styles.post_meta_info}>{post.author.username} | {(new Date(post.time_created)).toLocaleDateString()}</p>

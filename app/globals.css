@@ -12,7 +12,7 @@
     --text-black-light2: #7b7b7b;
     --body-bg-start: #a0a6b2;
     --body-bg-end: #dedede;
-    --main-bg-color:#EEEEEE;
+    --main-bg-color: #EEEEEE;
 }
 
 
@@ -26,7 +26,7 @@
 
 body {
     font-size: 62.5%;
-    font-family: var(--font-inter);
+    font-family: Roboto, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,16 +40,24 @@ a:visited {
     text-decoration: none;
     color: inherit;
 }
-main{
-    width: 90vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    margin: 1rem 0;
-    background-color: var(--main-bg-color);
-    padding: 1rem 3rem;
-    border-radius: 10px;
+
+/*main {*/
+/*    width: 90vw;*/
+/*    display: flex;*/
+/*    min-height: 60vh;*/
+/*    flex-direction: column;*/
+/*    justify-content: flex-start;*/
+/*    align-items: center;*/
+/*    margin: 1rem 0;*/
+/*    background-color: var(--main-bg-color);*/
+/*    padding: 1rem 3rem;*/
+/*    border-radius: 10px;*/
+/*}*/
+
+.snackbar_close_button {
+    font-size: 1.5rem;
+    color: darkred;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 600px) {
