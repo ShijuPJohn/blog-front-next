@@ -25,8 +25,6 @@ export const userSlice = createSlice({
             state.user = {loading: false, userInfo: {}}
         },
         login: (state, action) => {
-            console.log("inside login reducer", action.payload)
-            // state.user = {loading: false, userInfo: action.payload
             state.loading = false
             state.userInfo = action.payload
         },
@@ -40,7 +38,6 @@ export const userReducer = userSlice.reducer
 
 export const loginThunk = (email, password) => async (dispatch) => {
     try {
-        console.log("here", email, password)
 
         dispatch(loginRequest())
         const config = {
@@ -54,7 +51,6 @@ export const loginThunk = (email, password) => async (dispatch) => {
             {email, password},
             config
         )
-        console.log(data)
         dispatch(login(data))
     } catch (e) {
         dispatch(loginFail())

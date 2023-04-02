@@ -10,7 +10,6 @@ import {Button, TextField} from "@mui/material";
 
 const Page = () => {
     const userLogin = useSelector(state => state.user)
-    console.log("state.user",userLogin)
     const {loading, userInfo} = userLogin
     const router = useRouter();
     const dispatch = useDispatch()
