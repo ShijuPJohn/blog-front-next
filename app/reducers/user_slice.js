@@ -19,7 +19,6 @@ export const userSlice = createSlice({
     reducers: {
         loginRequest: (state) => {
             state.loading = true
-            state.userInfo = {}
         },
         loginFail: (state) => {
             state.user = {loading: false, userInfo: {}}

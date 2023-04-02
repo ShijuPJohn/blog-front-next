@@ -1,9 +1,8 @@
 'use client';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './header.module.css'
 import Link from "next/link";
 import {useDispatch, useSelector} from "react-redux";
-import {login, logout} from "../actions/userActions";
 import {enqueueSnackbar} from "notistack";
 import AddIcon from '@mui/icons-material/Add';
 
