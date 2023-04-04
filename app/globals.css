@@ -41,19 +41,6 @@ a:visited {
     color: inherit;
 }
 
-/*main {*/
-/*    width: 90vw;*/
-/*    display: flex;*/
-/*    min-height: 60vh;*/
-/*    flex-direction: column;*/
-/*    justify-content: flex-start;*/
-/*    align-items: center;*/
-/*    margin: 1rem 0;*/
-/*    background-color: var(--main-bg-color);*/
-/*    padding: 1rem 3rem;*/
-/*    border-radius: 10px;*/
-/*}*/
-
 .snackbar_close_button {
     font-size: 1.5rem;
     color: darkred;

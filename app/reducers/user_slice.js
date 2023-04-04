@@ -1,5 +1,7 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, combineReducers} from "@reduxjs/toolkit";
 import axios from "axios";
+import {HYDRATE} from "next-redux-wrapper";
+import {enqueueSnackbar} from "notistack";
 
 function getFromLocalStorage() {
     try {
@@ -7,7 +9,7 @@ function getFromLocalStorage() {
         if (serializedStore === null) {
             return {loading: false, userInfo: {}};
         }
-        return JSON.parse(serializedStore).user;
+        return JSON.parse(serializedStore).user.user;
     } catch (e) {
         return {loading: false, userInfo: {}};
     }
@@ -21,14 +23,19 @@ export const userSlice = createSlice({
             state.loading = true
         },
         loginFail: (state) => {
-            state.user = {loading: false, userInfo: {}}
+            state.loading = false
+            state.userInfo = {}
+            enqueueSnackbar('Login Failed', {variant: "error"})
         },
         login: (state, action) => {
             state.loading = false
             state.userInfo = action.payload
+            enqueueSnackbar('Logged In', {variant: "success"})
         },
         logout: (state) => {
-            state.user = {loading: false, userInfo: {}}
+            state.loading = false
+            state.userInfo = {}
+            enqueueSnackbar('Logged Out')
         }
     }
 })
@@ -53,6 +60,9 @@ export const loginThunk = (email, password) => async (dispatch) => {
         dispatch(login(data))
     } catch (e) {
         dispatch(loginFail())
+        if (e.response.status === 401){
+            enqueueSnackbar('Incorrect email or password', {variant: "error"})
+        }
     }
 }
 
@@ -75,3 +85,17 @@ export const signupThunk = (username, email, password) => async (dispatch) => {
         dispatch(loginFail())
     }
 }
+const combinedReducer = combineReducers({
+    user: userReducer
+});
+export const nextReducer = (state, action) => {
+    if (action.type === HYDRATE) {
+        const nextState = {
+            ...state, // use previous state
+            ...action.payload, // apply delta from hydration
+        };
+        return nextState;
+    } else {
+        return combinedReducer(state, action);
+    }
+};

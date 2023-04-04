@@ -6,10 +6,10 @@ import {loginThunk} from "../reducers/user_slice";
 import {useRouter} from "next/navigation";
 import {enqueueSnackbar} from 'notistack';
 import {useForm} from "react-hook-form";
-import {Button, TextField} from "@mui/material";
+import {Button, CircularProgress, TextField} from "@mui/material";
 
 const Page = () => {
-    const userLogin = useSelector(state => state.user)
+    const userLogin = useSelector(state => state.user.user)
     const {loading, userInfo} = userLogin
     const router = useRouter();
     const dispatch = useDispatch()
@@ -20,9 +20,11 @@ const Page = () => {
     }
     useEffect(() => {
         if (userInfo && Object.keys(userInfo).length !== 0) {
-            enqueueSnackbar('Logged In', {variant: "success"})
             router.push('/')
         }
+    }, [userInfo])
+    useEffect(() => {
+        console.log(userLogin)
     }, [userLogin])
 
     return (
@@ -57,8 +59,10 @@ const Page = () => {
                         variant={"outlined"}
                         {...register("password", {required: "Required"})}/>
                     <div className={styles.form_btn_container}>
-                        <Button className={styles.form_btn} variant={"contained"} type="submit">Submit</Button>
-                        <Button className={styles.form_btn} variant={"contained"} type="reset">Clear</Button>
+                        <Button className={styles.form_btn} variant={"contained"} type="submit"
+                                disabled={loading}>{loading ? <CircularProgress size={"1.4rem"}/> : 'Submit'}</Button>
+                        <Button className={styles.form_btn} variant={"contained"} type="reset"
+                                disabled={loading}>Clear</Button>
                     </div>
                 </form>
                 <div className={styles.grey_line}></div>

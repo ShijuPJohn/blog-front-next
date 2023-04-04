@@ -1,0 +1,128 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 1rem 1rem;
+    border-style: solid;
+    padding: 1rem;
+    border-width: 1px;
+    border-color: var(--border-grey);
+    border-radius: 10px;
+    background-color: var(--main-bg-color);
+    min-width: 90vw;
+    min-height: 100vh;
+}
+
+.page_title {
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+.main_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+    width: 100%;
+}
+
+.login_signup_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 70%;
+    margin: 1.5rem 1rem;
+    height: 100%;
+}
+
+.text_input_field {
+    margin: 1.0rem;
+    width: 90%;
+}
+
+.form_btn_container {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.form_btn {
+    font-size: .8rem;
+    width: 5rem;
+    height: 2rem;
+}
+
+
+.signup_login_title {
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--text-black-dark);
+    margin-top: 1rem;
+    border-bottom: solid;
+    border-color: var(--primary-color);
+    padding: .4rem;
+}
+
+.grey_line {
+    width: 60%;
+    height: .1rem;
+    background-color: var(--border-grey);
+}
+
+.create_acc_login {
+    font-size: 1.2rem;
+    font-weight: 200;
+    margin-top: 1rem;
+    color: var(--primary-color);
+}
+
+.tags_container {
+    width: 90%;
+    min-height: 10rem;
+    border-style: solid;
+    border-color: var(--border-grey);
+    border-width: 1px;
+    border-radius: 3px;
+    padding: 1rem;
+}
+
+.tags_container:hover {
+    border-color: #4b4b4b;
+
+}
+.tag_bubble{
+    display: inline-block;
+    margin: .5rem;
+    background-color: #879494;
+    padding: .5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+.tag_bubble_active{
+    display: inline-block;
+    margin: .5rem;
+    padding: .5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    color: white;
+    background-color: teal;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+    .login_signup_form {
+        width: 100%;
+    }
+
+    .login_signup_form {
+        width: 95%;
+    }
+}

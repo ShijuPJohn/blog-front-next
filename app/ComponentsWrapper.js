@@ -9,11 +9,7 @@ const ComponentsWrapper = ({children}) => {
     return (
         <Provider store={store}>
             <Header/>
-            <SnackbarProvider autoHideDuration={4000}
-                action={(snackbarId) => (
-                    <div onClick={() => closeSnackbar(snackbarId)}>
-                    </div>
-                )}>
+            <SnackbarProvider autoHideDuration={4000}>
                 {children}
             </SnackbarProvider>
         </Provider>

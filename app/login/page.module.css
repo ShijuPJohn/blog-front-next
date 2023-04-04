@@ -1,13 +1,35 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+    background-color: var(--main-bg-color);
+    padding: 1rem 3rem;
+    border-radius: 10px;
+    height: 45vh;
+}
+
+.main_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+    width: 100%;
+}
+
 .login_signup_form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
     width: 25rem;
     margin: 1.5rem 1rem;
+    height: 100%;
 }
 
 .text_input_field {
-    margin: 1rem;
+    margin: 1.0rem;
     width: 90%;
 }
 
@@ -19,26 +41,11 @@
 }
 
 .form_btn {
-
+    font-size: .8rem;
+    width: 5rem;
+    height: 2rem;
 }
 
-.main {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    margin: 1rem 0;
-    background-color: var(--main-bg-color);
-    padding: 1rem 3rem;
-    border-radius: 10px;
-}
-
-.main_container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 
 .signup_login_title {
     font-size: 2rem;
@@ -49,17 +56,20 @@
     border-color: var(--primary-color);
     padding: .4rem;
 }
-.grey_line{
+
+.grey_line {
     width: 60%;
     height: .1rem;
     background-color: var(--border-grey);
 }
-.create_acc_login{
+
+.create_acc_login {
     font-size: 1.2rem;
     font-weight: 200;
     margin-top: 1rem;
     color: var(--primary-color);
 }
+
 @media screen and (max-width: 600px) {
     .login_signup_form {
         width: 100%;
