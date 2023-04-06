@@ -46,6 +46,9 @@ a:visited {
     color: darkred;
     cursor: pointer;
 }
+input[type="file"] {
+    display: none;
+}
 
 @media screen and (max-width: 600px) {
     body {

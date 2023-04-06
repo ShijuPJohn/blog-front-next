@@ -49,12 +49,13 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    margin-top: 1rem;
 }
 
 .form_btn {
     font-size: .8rem;
-    width: 5rem;
-    height: 2rem;
+    width: 8rem;
+    height: 3rem;
 }
 
 
@@ -96,7 +97,8 @@
     border-color: #4b4b4b;
 
 }
-.tag_bubble{
+
+.tag_bubble {
     display: inline-block;
     margin: .5rem;
     background-color: #879494;
@@ -106,7 +108,8 @@
     color: white;
     cursor: pointer;
 }
-.tag_bubble_active{
+
+.tag_bubble_active {
     display: inline-block;
     margin: .5rem;
     padding: .5rem;
@@ -115,6 +118,65 @@
     color: white;
     background-color: teal;
     cursor: pointer;
+}
+
+.file_upload_inp {
+    margin: 1rem;
+    font-size: 1rem;
+}
+
+.custom_file_upload {
+    font-size: 1.2rem;
+    font-weight: 300;
+    border-style: solid;
+    border-width: 2px;
+    border-color: teal;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    background-color: #bed4d4;
+}
+
+.file_upload_box {
+    height: 8rem;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    border-color: var(--border-grey);
+    margin: 1rem;
+    padding: 1rem;
+    /*width: 90%;*/
+    min-width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.cover_image_filename_label{
+    font-size: 1rem;
+    margin: 1rem;
+}
+
+.image_upload_btn {
+    margin-bottom: 1rem;
+    width: 15rem;
+    height: 4rem;
+}
+.img_preview_box{
+    height: 20rem;
+    width: 40rem;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    border-color: var(--border-grey);
+    padding: .5rem;
+}
+.img_preview_box img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
 @media screen and (max-width: 600px) {

@@ -1,13 +1,13 @@
 import styles from './page.module.css'
 import PostCard from "@/app/post_card/post_card";
+import {useRouter} from "next/navigation";
 
 async function getPosts() {
-    const response = await fetch('http://localhost:8080/api/posts');
+    const response = await fetch('http://localhost:8080/api/posts',{ cache: 'no-store' });
     if (!response.ok) {
         throw new Error('fetch error');
     }
-    const posts = await response.json();
-    return posts;
+    return await response.json();
 }
 
 export default async function Home() {
