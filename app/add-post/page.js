@@ -7,6 +7,7 @@ import {useRouter} from "next/navigation";
 import {useForm} from "react-hook-form";
 import {Button, Checkbox, CircularProgress, FormControlLabel, TextField} from "@mui/material";
 import axios from "axios";
+import PostContentBlock from "@/app/post_content_block/post_content_block";
 
 const Page = () => {
     const userLogin = useSelector(state => state.user.user)
@@ -20,6 +21,7 @@ const Page = () => {
     const [coverImageFile, setCoverImageFile] = useState();
     const [coverImageUrl, setCoverImageUrl] = useState('')
     const [isFetching, setIsFetching] = useState(false)
+    const [postContentBlockIds, setPostContentBlockIds] = useState([])
     useEffect(() => {
         async function fetchCategories() {
             const headers = {
@@ -70,8 +72,6 @@ const Page = () => {
         }
         setIsFetching(false)
         router.push('/')
-        router.refresh()
-        console.log('page refreshed')
         enqueueSnackbar('Post Added Successfully', {variant: "success"});
     }
 
@@ -111,7 +111,7 @@ const Page = () => {
         <main className={styles.main}>
             <h2 className={styles.signup_login_title}>Add Post</h2>
             <div className={styles.main_container}>
-                <form onSubmit={handleSubmit(onSubmit)} className={styles.login_signup_form}>
+                <form onSubmit={handleSubmit(onSubmit)} className={styles.add_post_form}>
                     <TextField className={styles.text_input_field}
                                error={!!errors.title}
                                helperText={errors.title ? errors.title.message : null}
@@ -178,7 +178,7 @@ const Page = () => {
                     <div className={styles.img_preview_box}>
                         {coverImageUrl && <img src={coverImageUrl}/>}
                     </div>
-
+                    <PostContentBlock addToPost={setPostContentBlockIds}/>
 
                     <div className={styles.form_btn_container}>
                         <Button className={styles.form_btn} variant={"contained"} type="submit"

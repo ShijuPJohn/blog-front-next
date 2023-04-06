@@ -1,0 +1,14 @@
+.post_content_block_form{
+    width: 100%;
+    margin: 1rem 0;
+}
+.post_content_block_form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+.text_input_field{
+    width: 100%;
+    margin: 1rem 0;
+}
