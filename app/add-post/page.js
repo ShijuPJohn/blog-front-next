@@ -8,6 +8,9 @@ import {useForm} from "react-hook-form";
 import {Button, Checkbox, CircularProgress, FormControlLabel, TextField} from "@mui/material";
 import axios from "axios";
 import PostContentBlock from "@/app/post_content_block/post_content_block";
+import {v4 as uuidv4} from 'uuid';
+import AddIcon from '@mui/icons-material/Add';
+
 
 const Page = () => {
     const userLogin = useSelector(state => state.user.user)
@@ -22,6 +25,7 @@ const Page = () => {
     const [coverImageUrl, setCoverImageUrl] = useState('')
     const [isFetching, setIsFetching] = useState(false)
     const [postContentBlockIds, setPostContentBlockIds] = useState([])
+    const [blockIds, setBlockIds] = useState([])
     useEffect(() => {
         async function fetchCategories() {
             const headers = {
@@ -46,11 +50,22 @@ const Page = () => {
             router.push('/')
         }
     }, [userInfo])
+    useEffect(() => {
+        const uid = uuidv4();
+        setBlockIds([...blockIds, uid])
+    }, [])
 
     function handleDraftChange(event, value) {
         setDraft(pval => !pval)
     }
 
+    function blockSubmitHandler(type, content) {
+        console.log("Form submitted", {type, content})
+    }
+
+    function blockRemoveFn(id) {
+        setBlockIds(prevState => (prevState.filter(bid => bid !== id)))
+    }
 
     const onSubmit = async (data) => {
         setIsFetching(true)
@@ -178,8 +193,12 @@ const Page = () => {
                     <div className={styles.img_preview_box}>
                         {coverImageUrl && <img src={coverImageUrl}/>}
                     </div>
-                    <PostContentBlock addToPost={setPostContentBlockIds}/>
-
+                    {blockIds && blockIds.map(id => (
+                        <PostContentBlock removeFn={blockRemoveFn} id={id} blockAddFn={blockSubmitHandler} key={id}/>
+                    ))}
+                    <Button className={styles.new_block_btn} variant={"outlined"} onClick={() => {
+                        setBlockIds(prevState => ([...prevState, uuidv4()]))
+                    }}><AddIcon/></Button>
                     <div className={styles.form_btn_container}>
                         <Button className={styles.form_btn} variant={"contained"} type="submit"
                                 disabled={isFetching}>{isFetching ?

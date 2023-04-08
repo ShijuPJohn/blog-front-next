@@ -26,6 +26,7 @@
     "react-hook-form": "^7.43.9",
     "react-redux": "^8.0.5",
     "sanitize-html-react": "^1.13.0",
-    "styled-components": "^5.3.9"
+    "styled-components": "^5.3.9",
+    "uuid": "^9.0.0"
   }
 }
