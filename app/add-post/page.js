@@ -7,25 +7,29 @@ import {useRouter} from "next/navigation";
 import {useForm} from "react-hook-form";
 import {Button, Checkbox, CircularProgress, FormControlLabel, TextField} from "@mui/material";
 import axios from "axios";
-import PostContentBlock from "@/app/post_content_block/post_content_block";
-import {v4 as uuidv4} from 'uuid';
-import AddIcon from '@mui/icons-material/Add';
+import {Editor, EditorState} from 'draft-js';
+import 'draft-js/dist/Draft.css';
+import Head from "next/head";
+import WEditor from "@/app/editor/wEditor";
 
 
 const Page = () => {
-    const userLogin = useSelector(state => state.user.user)
+    const userLogin = useSelector(state => state.user.user);
     const {loading, userInfo} = userLogin
     const router = useRouter();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const {register, formState: {errors}, handleSubmit} = useForm();
     const [draft, setDraft] = useState(false);
     const [categories, setCategories] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [coverImageFile, setCoverImageFile] = useState();
-    const [coverImageUrl, setCoverImageUrl] = useState('')
-    const [isFetching, setIsFetching] = useState(false)
-    const [postContentBlockIds, setPostContentBlockIds] = useState([])
-    const [blockIds, setBlockIds] = useState([])
+    const [coverImageUrl, setCoverImageUrl] = useState('');
+    const [isFetching, setIsFetching] = useState(false);
+    const [contentHTML, setContentHTML] = useState('');
+
+    const [editorState, setEditorState] = React.useState(
+        () => EditorState.createEmpty(),
+    );
     useEffect(() => {
         async function fetchCategories() {
             const headers = {
@@ -43,6 +47,7 @@ const Page = () => {
         }
 
         fetchCategories()
+        setIsFetching(false)
 
     }, [])
     useEffect(() => {
@@ -50,44 +55,39 @@ const Page = () => {
             router.push('/')
         }
     }, [userInfo])
-    useEffect(() => {
-        const uid = uuidv4();
-        setBlockIds([...blockIds, uid])
-    }, [])
 
     function handleDraftChange(event, value) {
         setDraft(pval => !pval)
     }
 
-    function blockSubmitHandler(type, content) {
-        console.log("Form submitted", {type, content})
-    }
-
-    function blockRemoveFn(id) {
-        setBlockIds(prevState => (prevState.filter(bid => bid !== id)))
-    }
 
     const onSubmit = async (data) => {
-        setIsFetching(true)
-        data.draft = draft
-        data.archived = false
-        data.categories = selectedCategories
-        data.cover_image = coverImageUrl
-        console.log(data)
-        const headers = {
-            'Content-Type': 'application/json',
-            'x-token': userInfo.token
+        try {
+            setIsFetching(true)
+            data.draft = draft
+            data.archived = false
+            data.categories = selectedCategories
+            data.cover_image = coverImageUrl
+            data.description = contentHTML;
+            console.log(data)
+            const headers = {
+                'Content-Type': 'application/json',
+                'x-token': userInfo.token
+            }
+            const response = await axios.post("http://localhost:8080/api/post", data,
+                {headers})
+            console.log("Response", response)
+            setIsFetching(false)
+            if (response.status !== 201) {
+                router.push('/')
+                enqueueSnackbar('Failed to post', {variant: "error"});
+            }
+            router.push(`/posts/${response.data.post.seo_slug}`)
+            enqueueSnackbar('Post Added Successfully', {variant: "success"});
+        } catch (e) {
+            setIsFetching(false)
+            enqueueSnackbar('Failed to post. Try again', {variant: "error"});
         }
-        const response = await axios.post("http://localhost:8080/api/post", data,
-            {headers})
-        console.log(response)
-        if (response.status !== 201) {
-            router.push('/')
-            enqueueSnackbar('Failed to post', {variant: "error"});
-        }
-        setIsFetching(false)
-        router.push('/')
-        enqueueSnackbar('Post Added Successfully', {variant: "success"});
     }
 
 
@@ -122,91 +122,97 @@ const Page = () => {
         setIsFetching(false)
     }
 
+
     return (
-        <main className={styles.main}>
-            <h2 className={styles.signup_login_title}>Add Post</h2>
-            <div className={styles.main_container}>
-                <form onSubmit={handleSubmit(onSubmit)} className={styles.add_post_form}>
-                    <TextField className={styles.text_input_field}
-                               error={!!errors.title}
-                               helperText={errors.title ? errors.title.message : null}
-                               autoFocus
-                               type={"text"}
-                               label={"TITLE"}
-                               variant={"outlined"}
-                               {...register("title", {
-                                   required: "Required"
-                               })}
-                    />
-                    <TextField
-                        className={styles.text_input_field}
-                        error={!!errors.description}
-                        type={"text"}
-                        label={"CONTENT"}
-                        variant={"outlined"}
-                        {...register("description")}/>
-                    <TextField
-                        className={styles.text_input_field}
-                        error={!!errors.seo_slug}
-                        type={"text"}
-                        label={"SEO SLUG"}
-                        variant={"outlined"}
-                        {...register("seo_slug")}/>
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                checked={draft}
-                                onChange={handleDraftChange}
-                                name="checkedB"
-                                color="primary"
-                            />
-                        }
-                        label="Mark as draft"
-                    />
-                    <div className={styles.tags_container}>
-                        {categories.map(category => (
-                            <div key={category.id}
-                                 className={selectedCategories.includes(category.id) ? styles.tag_bubble_active : styles.tag_bubble}
-                                 onClick={() => {
-                                     if (selectedCategories.includes(category.id)) {
-                                         setSelectedCategories(prevState => prevState.filter(st => st !== category.id))
-                                     } else {
-                                         setSelectedCategories(prevState => [...prevState, category.id])
+        <>
+            <Head>
+                <meta charSet="utf-8"/>
+            </Head>
+            <Editor editorState={editorState} onChange={setEditorState} editorKey="editor"/>
+            <main className={styles.main}>
+                <h2 className={styles.signup_login_title}>Add Post</h2>
+                <div className={styles.main_container}>
+                    <form onSubmit={handleSubmit(onSubmit)} className={styles.add_post_form}>
+                        <TextField className={styles.text_input_field}
+                                   error={!!errors.title}
+                                   helperText={errors.title ? errors.title.message : null}
+                                   autoFocus
+                                   type={"text"}
+                                   label={"TITLE"}
+                                   variant={"outlined"}
+                                   {...register("title", {
+                                       required: "Required"
+                                   })}
+                        />
+                        {/*<TextField*/}
+                        {/*    className={styles.text_input_field}*/}
+                        {/*    error={!!errors.description}*/}
+                        {/*    type={"text"}*/}
+                        {/*    label={"CONTENT"}*/}
+                        {/*    variant={"outlined"}*/}
+                        {/*    {...register("description")}/>*/}
+                        <TextField
+                            className={styles.text_input_field}
+                            error={!!errors.seo_slug}
+                            type={"text"}
+                            label={"SEO SLUG"}
+                            variant={"outlined"}
+                            {...register("seo_slug")}/>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={draft}
+                                    onChange={handleDraftChange}
+                                    name="checkedB"
+                                    color="primary"
+                                />
+                            }
+                            label="Mark as draft"
+                        />
+                        <div className={styles.tags_container}>
+                            {categories.map(category => (
+                                <div key={category.id}
+                                     className={selectedCategories.includes(category.id) ? styles.tag_bubble_active : styles.tag_bubble}
+                                     onClick={() => {
+                                         if (selectedCategories.includes(category.id)) {
+                                             setSelectedCategories(prevState => prevState.filter(st => st !== category.id))
+                                         } else {
+                                             setSelectedCategories(prevState => [...prevState, category.id])
+                                         }
                                      }
-                                 }
-                                 }>{category.name}</div>)
-                        )}
-                    </div>
-                    <div className={styles.file_upload_box}>
-                        <label className={styles.custom_file_upload}>
-                            <input onChange={handleChange} type={"file"} className={styles.file_upload_inp}/>
-                            Select Cover Image
-                        </label>
-                        <span
-                            className={styles.cover_image_filename_label}>{coverImageFile ? coverImageFile.name : 'No file selected'}</span>
-                    </div>
-                    <Button variant={"contained"} className={styles.image_upload_btn}
-                            onClick={handleCoverImageSubmit} disabled={!coverImageFile}>
-                        {isFetching ?
-                            <CircularProgress style={{color: "#FFF"}}/> : "Upload Image"}
-                    </Button>
-                    <div className={styles.img_preview_box}>
-                        {coverImageUrl && <img src={coverImageUrl}/>}
-                    </div>
-                    {blockIds && blockIds.map(id => (
-                        <PostContentBlock removeFn={blockRemoveFn} id={id} blockAddFn={blockSubmitHandler} key={id}/>
-                    ))}
-                    <Button className={styles.new_block_btn} variant={"outlined"} onClick={() => {
-                        setBlockIds(prevState => ([...prevState, uuidv4()]))
-                    }}><AddIcon/></Button>
-                    <div className={styles.form_btn_container}>
-                        <Button className={styles.form_btn} variant={"contained"} type="submit"
-                                disabled={isFetching}>{isFetching ?
-                            <CircularProgress size={"1.4rem"}/> : 'Submit'}</Button>
-                    </div>
-                </form>
-            </div>
-        </main>
+                                     }>{category.name}</div>)
+                            )}
+                        </div>
+                        <div className={styles.file_upload_box}>
+                            <label className={styles.custom_file_upload}>
+                                <input onChange={handleChange} type={"file"} className={styles.file_upload_inp}/>
+                                Select Cover Image
+                            </label>
+                            <span
+                                className={styles.cover_image_filename_label}>{coverImageFile ? coverImageFile.name : 'No file selected'}</span>
+                        </div>
+                        <Button variant={"contained"} className={styles.image_upload_btn}
+                                onClick={handleCoverImageSubmit} disabled={!coverImageFile}>
+                            {isFetching ?
+                                <CircularProgress style={{color: "#FFF"}}/> : "Upload Image"}
+                        </Button>
+                        <div className={styles.img_preview_box}>
+                            {coverImageUrl && <img src={coverImageUrl}/>}
+                        </div>
+                        <div className={styles.editor_container}>
+                            <WEditor updateHTMLFn={setContentHTML}/>
+                        </div>
+
+
+                        <div className={styles.form_btn_container}>
+                            <Button className={styles.form_btn} variant={"contained"} type="submit"
+                                    disabled={isFetching}>{isFetching ?
+                                <CircularProgress size={"1.4rem"}/> : 'Submit'}</Button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </>
     );
 };
 

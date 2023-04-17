@@ -9,10 +9,10 @@ import {useForm} from "react-hook-form";
 import {Button, TextField} from "@mui/material";
 
 const Page = () => {
-    const userLogin = useSelector(state => state.user.user)
-    const {loading, userInfo} = userLogin
+    const userLogin = useSelector(state => state.user.user);
+    const {loading, userInfo} = userLogin;
     const router = useRouter();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const {register, formState: {errors}, handleSubmit} = useForm();
 
     const onSubmit = async (data) => {
@@ -39,7 +39,7 @@ const Page = () => {
                             type={"text"}
                             label={"USERNAME"}
                             variant={"outlined"}
-                            {...register("usrname", {required: "Required"})}/>
+                            {...register("username", {required: "Required"})}/>
                         <TextField
                             className={styles.text_input_field}
                             error={!!errors.email}

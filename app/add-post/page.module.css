@@ -184,6 +184,14 @@
 .new_block_btn{
     margin-top: 1rem;
 }
+.editor_container{
+    margin: 2rem 0;
+    padding: 1rem;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--border-grey);
+    border-radius: 10px;
+}
 
 @media screen and (max-width: 600px) {
     .login_signup_form {

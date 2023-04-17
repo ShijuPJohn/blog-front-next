@@ -44,7 +44,6 @@ export const userReducer = userSlice.reducer
 
 export const loginThunk = (email, password) => async (dispatch) => {
     try {
-
         dispatch(loginRequest())
         const config = {
             headers: {
@@ -60,7 +59,7 @@ export const loginThunk = (email, password) => async (dispatch) => {
         dispatch(login(data))
     } catch (e) {
         dispatch(loginFail())
-        if (e.response.status === 401){
+        if (e.response.status === 401) {
             enqueueSnackbar('Incorrect email or password', {variant: "error"})
         }
     }
@@ -68,6 +67,7 @@ export const loginThunk = (email, password) => async (dispatch) => {
 
 export const signupThunk = (username, email, password) => async (dispatch) => {
     try {
+        console.log(username, email, password)
         dispatch(loginRequest())
         const config = {
             headers: {
@@ -75,6 +75,7 @@ export const signupThunk = (username, email, password) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         }
+        console.log(username)
         const {data} = await axios.post(
             "http://localhost:8080/api/users",
             {username, email, password},

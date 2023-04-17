@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './page.module.css'
 import sanitizeHtml from "sanitize-html-react";
+import parse from 'html-react-parser';
 
 async function fetchPost(slug) {
     const resp = await fetch(`http://localhost:8080/api/post/byslug/${slug}`);
@@ -22,8 +23,7 @@ const Page = async ({params}) => {
             <div className={styles.image_container}>
                 <img src={post.cover_image} alt=""/>
             </div>
-            <div className={styles.post_descr}
-                 dangerouslySetInnerHTML={{__html: sanitizeHtml(post.description)}}/>
+            <div className={styles.post_descr}>{parse(post.description)}</div>
         </main>
     );
 };

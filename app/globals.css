@@ -7,7 +7,7 @@
     --secondary-color-light: #FFF;
     --secondary-color-dark: #FFF;
     --border-grey: #c0c0c0;
-    --text-black-dark: #2d2d2d;
+    --text-black-dark: #393939;
     --text-black-light1: #585858;
     --text-black-light2: #7b7b7b;
     --body-bg-start: #a0a6b2;
@@ -33,6 +33,7 @@ body {
     justify-content: flex-start;
     background: linear-gradient(to bottom right, var(--body-bg-start), var(--body-bg-end)) no-repeat;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 a:link,

@@ -24,6 +24,7 @@ export default function RootLayout({children}) {
         <html lang="en" className={`${inter.variable} ${roboto.variable}`}>
         <head>
             <title>My Blog</title>
+
         </head>
         <body>
         <ComponentsWrapper>
