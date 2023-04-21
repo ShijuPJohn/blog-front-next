@@ -14,18 +14,21 @@
 }
 
 .post_title_text {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     font-weight: 500;
     color: var(--text-black-dark);
+    text-transform: uppercase;
 }
-.post_meta_container{
+
+.post_meta_container {
     margin: .7rem 0;
     font-size: .8rem;
     color: var(--text-black-light2);
 }
+
 .image_container {
-    height: 20rem;
-    width: calc(40% + 1vw);
+    height: 23rem;
+    width: calc(45% + 2vw);
     border-style: solid;
     padding: .8rem;
     border-color: var(--border-grey);
@@ -39,36 +42,50 @@
     object-fit: cover;
 }
 
-.post_descr{
+.post_descr {
     width: 100%;
     padding: 2rem;
     color: var(--text-black-dark);
     font-size: 1.1rem;
+    line-height: 1.8rem;
 }
-.post_descr ul{
+
+.post_descr ul {
     margin-left: 1rem;
 }
-.post_descr h2{
+
+.post_descr h2 {
     font-size: 2rem;
+    margin: .6rem 0;
 }
-.post_descr h3{
+
+.post_descr h3 {
     font-size: 1.2rem;
+    margin: .5rem 0;
 }
+
+.post_descr h4 {
+    margin: .8rem 0;
+}
+
 @media screen and (max-width: 1200px) {
     .image_container {
         width: 60%;
     }
 }
+
 @media screen and (max-width: 900px) {
     .image_container {
         width: 70%;
     }
 }
+
 @media screen and (max-width: 760px) {
     .image_container {
         width: 85%;
     }
 }
+
 @media screen and (max-width: 600px) {
     .image_container {
         width: 95%;

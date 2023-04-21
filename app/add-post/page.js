@@ -31,6 +31,8 @@ const Page = () => {
         () => EditorState.createEmpty(),
     );
     useEffect(() => {
+        setIsFetching(false);
+
         async function fetchCategories() {
             const headers = {
                 'Content-Type': 'application/json',
@@ -46,8 +48,7 @@ const Page = () => {
             enqueueSnackbar('Categories Fetched', {variant: "success"});
         }
 
-        fetchCategories()
-        setIsFetching(false)
+        fetchCategories();
 
     }, [])
     useEffect(() => {
@@ -199,8 +200,21 @@ const Page = () => {
                         <div className={styles.img_preview_box}>
                             {coverImageUrl && <img src={coverImageUrl}/>}
                         </div>
+
                         <div className={styles.editor_container}>
                             <WEditor updateHTMLFn={setContentHTML}/>
+                        </div>
+                        <div className={styles.content_text_container}>
+                            <TextField
+                                className={styles.content_text_container}
+                                multiline
+                                rows={10}
+                                value={contentHTML}
+                                onChange={(event) => {
+                                    setContentHTML(event.target.value)
+                                }
+                                }
+                            />
                         </div>
 
 

@@ -1,9 +1,12 @@
 'use client';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './page.module.css';
 import {useDispatch, useSelector} from "react-redux";
 import {useRouter} from "next/navigation";
-
+import axios from "axios";
+import PostCard from "@/app/post_card/post_card";
+import {CircularProgress} from "@mui/material";
+import jwt_decode from "jwt-decode";
 
 
 function Page(props) {
@@ -11,15 +14,80 @@ function Page(props) {
     const {loading, userInfo} = userLogin;
     const router = useRouter();
     const dispatch = useDispatch();
+    const [posts, setPosts] = useState([]);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const userInfoFromToken = jwt_decode(userInfo.token);
+    const {username, userid, useremail} = {
+        username: userInfoFromToken.username,
+        userid: userInfoFromToken.id,
+        useremail: userInfoFromToken.email
+    };
+
+    const handleDeleteClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleDeleteClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
+
     useEffect(() => {
         if (!(userInfo && Object.keys(userInfo).length !== 0)) {
             router.push('/')
         }
     }, [userInfo]);
+    useEffect(() => {
+        async function fetchPosts() {
+            const url = 'http://localhost:8080/api/user/posts';
+            const config = {
+                headers: {
+                    'content-type': 'multipart/form-data',
+                    'x-token': userInfo.token
+                },
+            };
+            const response = await axios.get(url, config);
+            console.log(response)
+            if (response.status !== 200) {
+                throw new Error('fetch error');
+            }
+            setPosts(response.data)
+        }
+
+        fetchPosts();
+
+    }, [])
+
+    async function postDeleteFn(pid) {
+        const url = `http://localhost:8080/api/posts/${pid}`;
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data',
+                'x-token': userInfo.token
+            },
+        };
+        const response = await axios.delete(url, config);
+        console.log(response)
+        if (response.status !== 200) {
+            throw new Error('fetch error');
+        }
+        setPosts(prevState => prevState.filter(post => post.id !== pid));
+    }
+
     return (
-        <>
-            <h1>Dashboard</h1>
-        </>
+        <main className={styles.main}>
+            <div className={styles.info_block}>
+                <h2>{`Hello ${username}`}</h2>
+                <h3>{`email: ${useremail}`}</h3>
+            </div>
+            {posts.length !== 0 ? posts.map(post => (
+                <PostCard post={post} createdDate={(new Date(post.time_created)).toLocaleDateString()} key={post.id}
+                          postControls={true} deleteFn={postDeleteFn}/>
+
+            )) : <CircularProgress className={styles.circular_progress}/>}
+        </main>
     );
 }
 
