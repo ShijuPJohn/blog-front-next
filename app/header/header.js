@@ -24,7 +24,6 @@ const Header = () => {
             {!showSidebar && <Link href={"/"}>
                 <div className={styles.logo_box}>
                     <img src="/logo.png" alt="logo"/>
-                    <h1 className={styles.logo_text}>TheFullStack.site</h1>
                 </div>
             </Link>}
             <div className={styles.main_nav_ham_btn} onClick={(event) => {
@@ -37,11 +36,14 @@ const Header = () => {
             <nav className={`${styles.main_nav}`}>
                 <ul className={`${styles.main_nav_links}`}>
                     {userInfo && Object.keys(userInfo).length !== 0 ?
-                        <li className={styles.main_nav_links_item}><Link href="/add-post"><AddIcon/></Link></li> : null}
+                        <>
+                            <li className={styles.main_nav_links_item}><Link href="/add-post"><AddIcon/></Link></li>
+                            <li className={styles.main_nav_links_item}><Link href="/dashboard">Dashboard</Link></li>
+                        </> : null}
                     <li className={styles.main_nav_links_item}><Link href="/">Home</Link></li>
-                    <li className={styles.main_nav_links_item}><Link href="/">Categories</Link></li>
-                    <li className={styles.main_nav_links_item}><Link href="/about">About</Link></li>
-                    <li className={styles.main_nav_links_item}><Link href="/">Contact</Link></li>
+                    {/*<li className={styles.main_nav_links_item}><Link href="/">Categories</Link></li>*/}
+                    {/*<li className={styles.main_nav_links_item}><Link href="/about">About</Link></li>*/}
+                    {/*<li className={styles.main_nav_links_item}><Link href="/">Contact</Link></li>*/}
                     {userInfo && Object.keys(userInfo).length !== 0 ?
                         <li className={styles.main_nav_links_item} onClick={() => {
                             dispatch(logout())

@@ -6,6 +6,8 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import "nprogress/nprogress.css";
+import dynamic from "next/dynamic";
 
 const inter = Inter({
     subsets: ['latin'],
@@ -18,15 +20,23 @@ const roboto = Roboto({
     subsets: ['latin'],
     display: 'swap'
 })
+const TopProgressBar = dynamic(
+    () => {
+        return import("./topProgressBar");
+    },
+    { ssr: false },
+);
 
 export default function RootLayout({children}) {
     return (
         <html lang="en" className={`${inter.variable} ${roboto.variable}`}>
         <head>
+            <link rel="icon" type="image/png" href="/favicon.png"/>
             <title>My Blog</title>
 
         </head>
         <body>
+        <TopProgressBar />
         <ComponentsWrapper>
             {children}
         </ComponentsWrapper>
