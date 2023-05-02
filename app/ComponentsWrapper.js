@@ -1,9 +1,9 @@
 'use client';
-import React, {Suspense} from 'react';
+import React from 'react';
 import Header from "@/app/header/header";
 import {Provider} from "react-redux";
 import store from "@/app/store";
-import {closeSnackbar, SnackbarProvider} from "notistack";
+import {SnackbarProvider} from "notistack";
 
 const ComponentsWrapper = ({children}) => {
     return (

@@ -2,9 +2,10 @@ import React from 'react';
 import styles from './page.module.css'
 import sanitizeHtml from "sanitize-html-react";
 import parse from 'html-react-parser';
+import {fetchURL} from "@/app/constants";
 
 async function fetchPost(slug) {
-    const resp = await fetch(`http://localhost:8080/api/post/byslug/${slug}`);
+    const resp = await fetch(`${fetchURL}/post/byslug/${slug}`);
     if (!resp.ok) {
         throw new Error("fetch error");
     }

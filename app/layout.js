@@ -1,6 +1,5 @@
 import './globals.css'
 import {Inter, Roboto} from 'next/font/google';
-import Header from './header/header'
 import ComponentsWrapper from "@/app/ComponentsWrapper";
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -31,7 +30,6 @@ export default function RootLayout({children}) {
     return (
         <html lang="en" className={`${inter.variable} ${roboto.variable}`}>
         <head>
-            <link rel="icon" type="image/png" href="/favicon.png"/>
             <title>My Blog</title>
 
         </head>

@@ -7,11 +7,10 @@ import {useRouter} from "next/navigation";
 import {useForm} from "react-hook-form";
 import {Button, Checkbox, CircularProgress, FormControlLabel, TextField} from "@mui/material";
 import axios from "axios";
-import {Editor, EditorState} from 'draft-js';
-import 'draft-js/dist/Draft.css';
 import Head from "next/head";
 import WEditor from "@/app/editor/wEditor";
 import Router from "next/router";
+import {categoriesData} from "@/app/constants";
 
 
 const Page = () => {
@@ -21,16 +20,11 @@ const Page = () => {
     const dispatch = useDispatch();
     const {register, formState: {errors}, handleSubmit} = useForm();
     const [draft, setDraft] = useState(false);
-    const [categories, setCategories] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [coverImageFile, setCoverImageFile] = useState();
     const [coverImageUrl, setCoverImageUrl] = useState('');
     const [isFetching, setIsFetching] = useState(false);
     const [contentHTML, setContentHTML] = useState('');
-
-    const [editorState, setEditorState] = React.useState(
-        () => EditorState.createEmpty(),
-    );
     const [notSaved, setNotSaved] = useState(true)
     useEffect(() => {
         const confirmationMessage = 'Changes you made may not be saved.';
@@ -56,27 +50,6 @@ const Page = () => {
             Router.events.off('routeChangeStart', beforeRouteHandler);
         };
     }, [notSaved]);
-    useEffect(() => {
-        setIsFetching(false);
-
-        async function fetchCategories() {
-            const headers = {
-                'Content-Type': 'application/json',
-                'x-token': userInfo.token
-            }
-            const response = await axios.get("http://localhost:8080/api/categories",
-                {headers})
-            if (response.status !== 200) {
-                router.push('/')
-                enqueueSnackbar('Failed to fetch categories', {variant: "error"});
-            }
-            setCategories(response.data)
-            enqueueSnackbar('Categories Fetched', {variant: "success"});
-        }
-
-        fetchCategories();
-
-    }, [])
     useEffect(() => {
         if (!(userInfo && Object.keys(userInfo).length !== 0)) {
             router.push('/')
@@ -152,10 +125,6 @@ const Page = () => {
 
     return (
         <>
-            <Head>
-                <meta charSet="utf-8"/>
-            </Head>
-            <Editor editorState={editorState} onChange={setEditorState} editorKey="editor"/>
             <main className={styles.main}>
                 <h2 className={styles.signup_login_title}>Add Post</h2>
                 <div className={styles.main_container}>
@@ -197,7 +166,7 @@ const Page = () => {
                             label="Mark as draft"
                         />
                         <div className={styles.tags_container}>
-                            {categories.map(category => (
+                            {categoriesData.map(category => (
                                 <div key={category.id}
                                      className={selectedCategories.includes(category.id) ? styles.tag_bubble_active : styles.tag_bubble}
                                      onClick={() => {

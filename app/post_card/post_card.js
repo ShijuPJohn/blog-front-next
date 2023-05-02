@@ -64,9 +64,11 @@ const PostCard = ({post, createdDate, postControls, deleteFn}) => {
                     <div onClick={handleClickOpen} className={styles.post_controls_btn}>
                         <DeleteIcon/>
                     </div>
-                    <div className={styles.post_controls_btn}>
-                        <EditIcon style={{color:"black"}}/>
-                    </div>
+                    <Link href={`/edit/${post.id}`}>
+                        <div className={styles.post_controls_btn}>
+                            <EditIcon style={{color: "black"}}/>
+                        </div>
+                    </Link>
                 </div>}
             </div>
         </>

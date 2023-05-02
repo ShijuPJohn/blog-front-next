@@ -12,11 +12,11 @@ function WEditor({initialHTML, updateHTMLFn}) {
     const {loading, userInfo} = userLogin
     const [editor, setEditor] = useState(null);
     const [html, setHtml] = useState(initialHTML ? initialHTML : '');
-    useEffect(() => {
-        setTimeout(() => {
-            setHtml('<p>hello&nbsp;world</p>')
-        }, 1500);
-    }, []);
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         setHtml('<p>hello&nbsp;world</p>')
+    //     }, 1500);
+    // }, []);
     const toolbarConfig = {};
     const editorConfig = {
         placeholder: 'Type here...',
