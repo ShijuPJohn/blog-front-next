@@ -1,36 +1,21 @@
-FROM node:12.8-alpine as test-target
-ENV NODE_ENV=development
-ENV PATH $PATH:/usr/src/app/node_modules/.bin
+FROM node:alpine
+
+RUN mkdir -p /usr/src/app
+ENV PORT 3000
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY package.json /usr/src/app
+COPY package-lock.json /usr/src/app
 
-# CI and release builds should use npm ci to fully respect the lockfile.
-# Local development may use npm install for opportunistic package updates.
-RUN npm install
+# Production use node instead of root
+# USER node
 
-COPY . .
+RUN npm install --production
 
-# Build
-FROM test-target as build-target
-ENV NODE_ENV=production
+COPY . /usr/src/app
 
-# Use build tools, installed as development packages, to produce a release build.
 RUN npm run build
 
-# Reduce installed packages to production-only.
-RUN npm prune --production
-
-# Archive
-FROM node:12.8-alpine as archive-target
-ENV NODE_ENV=production
-ENV PATH $PATH:/usr/src/app/node_modules/.bin
-
-WORKDIR /usr/src/app
-
-# Include only the release build and production packages.
-COPY --from=build-target /usr/src/app/node_modules node_modules
-COPY --from=build-target /usr/src/app/.next .next
-
-CMD ["next", "start"]
+EXPOSE 3000
+CMD [ "npm", "run start" ]
