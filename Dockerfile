@@ -15,7 +15,7 @@ RUN npm install --production
 
 COPY . /usr/src/app
 
-RUN npm run build
+RUN npm build
 
 EXPOSE 3000
-CMD [ "next", "start" ]
+CMD [ "npm", "start" ]
