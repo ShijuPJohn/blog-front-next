@@ -1,0 +1,228 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 1rem 1rem;
+    border-style: solid;
+    padding: 1rem;
+    border-width: 1px;
+    border-color: var(--border-grey);
+    border-radius: 10px;
+    background-color: var(--main-bg-color);
+    min-width: 90vw;
+    min-height: 100vh;
+}
+
+.page_title {
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+.main_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+    width: 70%;
+}
+
+.add_post_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 70%;
+    margin: 1.5rem 1rem;
+    height: 100%;
+}
+/*.add_post_form div{*/
+/*    width: 100%;*/
+/*}*/
+
+.text_input_field {
+    /*margin: 1rem;*/
+    width: 90%;
+}
+
+.form_btn_container {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 1rem;
+}
+
+.form_btn {
+    font-size: .8rem;
+    width: 8rem;
+    height: 3rem;
+}
+
+
+.signup_login_title {
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--text-black-dark);
+    margin-top: 1rem;
+    border-bottom: solid;
+    border-color: var(--primary-color);
+    padding: .4rem;
+}
+
+.grey_line {
+    width: 60%;
+    height: .1rem;
+    background-color: var(--border-grey);
+}
+
+.create_acc_login {
+    font-size: 1.2rem;
+    font-weight: 200;
+    margin-top: 1rem;
+    color: var(--primary-color);
+}
+
+.tags_container {
+    width: 90%;
+    min-height: 10rem;
+    border-style: solid;
+    border-color: var(--border-grey);
+    border-width: 1px;
+    border-radius: 3px;
+    padding: 1rem;
+}
+
+.tags_container:hover {
+    border-color: #4b4b4b;
+
+}
+
+.tag_bubble {
+    display: inline-block;
+    margin: .5rem;
+    background-color: #879494;
+    padding: .5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.tag_bubble_active {
+    display: inline-block;
+    margin: .5rem;
+    padding: .5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    color: white;
+    background-color: teal;
+    cursor: pointer;
+}
+
+.file_upload_inp {
+    margin: 1rem;
+    font-size: 1rem;
+}
+
+.custom_file_upload {
+    font-size: 1.2rem;
+    font-weight: 300;
+    border-style: solid;
+    border-width: 1px;
+    border-color: teal;
+    /*border-radius: 10px;*/
+    padding: .1rem;
+    color: blue;
+    cursor: pointer;
+}
+
+.file_upload_box {
+    height: 8rem;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    border-color: var(--border-grey);
+    margin: 1rem;
+    padding: 1rem;
+    /*width: 90%;*/
+    min-width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.cover_image_filename_label{
+    font-size: 1rem;
+    margin: 1rem;
+}
+
+.image_upload_btn {
+    margin-bottom: 1rem;
+    width: 15rem;
+    height: 4rem;
+}
+.img_preview_box{
+    height: 20rem;
+    width: 40rem;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    border-color: var(--border-grey);
+    padding: .5rem;
+}
+.img_preview_box img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.new_block_btn{
+    margin-top: 1rem;
+}
+.editor_container{
+    margin: 2rem 0;
+    padding: 1rem;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--border-grey);
+    border-radius: 10px;
+}
+.content_text_container{
+    width: 100%;
+    padding: 1rem;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--border-grey);
+    border-radius: 10px;
+}
+.content_text_field{
+    width: 100%;
+    background-color: white;
+}
+.file_upload_btns_container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+}
+.file_upload_delete_btn{
+    color: darkred;
+}
+@media screen and (max-width: 600px) {
+    .tags_container{
+        width: 70%;
+    }
+    .text_input_field{
+        width: 70%;
+    }
+    .main_container{
+        width: 95%;
+    }
+    .login_signup_form {
+        width: 100%;
+    }
+
+}

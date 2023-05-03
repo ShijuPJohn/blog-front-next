@@ -1,5 +1,8 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, combineReducers} from "@reduxjs/toolkit";
 import axios from "axios";
+import {HYDRATE} from "next-redux-wrapper";
+import {enqueueSnackbar} from "notistack";
+import {fetchURL} from "@/app/constants";
 
 function getFromLocalStorage() {
     try {
@@ -7,7 +10,7 @@ function getFromLocalStorage() {
         if (serializedStore === null) {
             return {loading: false, userInfo: {}};
         }
-        return JSON.parse(serializedStore).user;
+        return JSON.parse(serializedStore).user.user;
     } catch (e) {
         return {loading: false, userInfo: {}};
     }
@@ -21,14 +24,19 @@ export const userSlice = createSlice({
             state.loading = true
         },
         loginFail: (state) => {
-            state.user = {loading: false, userInfo: {}}
+            state.loading = false
+            state.userInfo = {}
+            enqueueSnackbar('Login Failed', {variant: "error"})
         },
         login: (state, action) => {
             state.loading = false
             state.userInfo = action.payload
+            enqueueSnackbar('Logged In', {variant: "success"})
         },
         logout: (state) => {
-            state.user = {loading: false, userInfo: {}}
+            state.loading = false
+            state.userInfo = {}
+            enqueueSnackbar('Logged Out')
         }
     }
 })
@@ -37,7 +45,6 @@ export const userReducer = userSlice.reducer
 
 export const loginThunk = (email, password) => async (dispatch) => {
     try {
-
         dispatch(loginRequest())
         const config = {
             headers: {
@@ -46,18 +53,22 @@ export const loginThunk = (email, password) => async (dispatch) => {
             }
         }
         const {data} = await axios.post(
-            "http://localhost:8080/api/users/login",
+            `${fetchURL}/users/login`,
             {email, password},
             config
         )
         dispatch(login(data))
     } catch (e) {
         dispatch(loginFail())
+        if (e.response.status === 401) {
+            enqueueSnackbar('Incorrect email or password', {variant: "error"})
+        }
     }
 }
 
 export const signupThunk = (username, email, password) => async (dispatch) => {
     try {
+        console.log(username, email, password)
         dispatch(loginRequest())
         const config = {
             headers: {
@@ -65,8 +76,9 @@ export const signupThunk = (username, email, password) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         }
+        console.log(username)
         const {data} = await axios.post(
-            "http://localhost:8080/api/users",
+            `${fetchURL}/users`,
             {username, email, password},
             config
         )
@@ -75,3 +87,17 @@ export const signupThunk = (username, email, password) => async (dispatch) => {
         dispatch(loginFail())
     }
 }
+const combinedReducer = combineReducers({
+    user: userReducer
+});
+export const nextReducer = (state, action) => {
+    if (action.type === HYDRATE) {
+        const nextState = {
+            ...state, // use previous state
+            ...action.payload, // apply delta from hydration
+        };
+        return nextState;
+    } else {
+        return combinedReducer(state, action);
+    }
+};

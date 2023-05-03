@@ -1,0 +1,24 @@
+.main {
+    width: 90vw;
+    display: flex;
+    min-height: 60vh;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+    background-color: var(--main-bg-color);
+    padding: 1rem 3rem;
+    border-radius: 10px;
+}
+.circular_progress{
+    font-size: 4rem;
+    color: dodgerblue;
+}
+.info_block{
+    width: 90%;
+    font-size: 1rem;
+    color: var(--text-black-light1);
+}
+.info_block:first-child{
+
+}

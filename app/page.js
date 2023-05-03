@@ -1,18 +1,23 @@
 import styles from './page.module.css'
 import PostCard from "@/app/post_card/post_card";
-
+import {fetchURL} from "@/app/constants";
 async function getPosts() {
-    const response = await fetch('http://localhost:8080/api/posts');
+    const response = await fetch(`${fetchURL}/posts`,{ cache: 'no-store' });
+// ,{ cache: 'no-store' }
     if (!response.ok) {
         throw new Error('fetch error');
     }
-    const posts = await response.json();
-    return posts;
+    return await response.json();
 }
+export const metadata = {
+    icons: {
+        icon: '/favicon.png',
+    },
+    title:'ThinkPython'
+};
 
 export default async function Home() {
     const posts = await getPosts();
-    console.log(posts)
     return (
         <main className={styles.main}>
             {posts && posts.map(post => (

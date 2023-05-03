@@ -15,7 +15,7 @@
     margin-left: 2rem;
 }
 .logo_box img{
-    height: calc(2rem + 1.2vw);
+    height: calc(1.5rem + 1.2vw);
 }
 .logo_text{
     color: white;
@@ -31,13 +31,15 @@
 
 .main_nav_links {
     display: flex;
+    justify-content: center;
+    align-items: center;
     list-style: none;
 }
 
 .main_nav_links_item {
     text-transform: uppercase;
-    font-size: calc(.8rem + .4vw);
-    margin-right: 2rem;
+    font-size: calc(.5rem + .6vw);
+    margin-right: calc(1rem + .5vw);
     color: white;
     font-weight: 400;
     transition: color .5s ease-in;
