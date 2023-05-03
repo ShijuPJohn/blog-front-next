@@ -4,7 +4,7 @@ FROM node:16.14
 WORKDIR .
 
 # Copying source files
-COPY --from=builder --chown=nextjs:nodejs /app/.next/server ./.next/server
+COPY . .
 
 # Building app
 RUN npm run build
