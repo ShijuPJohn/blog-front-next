@@ -4,7 +4,7 @@ export const USER_LOGIN_FAIL = "USER_LOGIN_FAIL"
 export const USER_LOGOUT = "USER_LOGOUT"
 const localAPI = "http://localhost:8080/api"
 const cloudAPI = "https://blog-backend-flask-rfzj7peyoa-uc.a.run.app/api"
-export const fetchURL = localAPI
+export const fetchURL = cloudAPI
 export const categoriesData = [
     {
         "id": 1,

@@ -1,5 +1,6 @@
 import styles from './page.module.css'
 import PostCard from "@/app/post_card/post_card";
+import {fetchURL} from "@/app/constants";
 async function getPosts() {
     const response = await fetch(`${fetchURL}/posts`,{ cache: 'no-store' });
 // ,{ cache: 'no-store' }
