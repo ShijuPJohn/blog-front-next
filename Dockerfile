@@ -1,13 +1,15 @@
 FROM node:16.14
 
 # Setting working directory. All the path will be relative to WORKDIR
-WORKDIR ./
+WORKDIR /app
 
 # Copying source files
-COPY /app/package.json ./package.json
-COPY /app/node_modules ./node_modules
-COPY /app/.next ./.next
-COPY /app/public ./public
+COPY ./package.json ./package.json
+COPY ./node_modules ./node_modules
+COPY ./.next ./.next
+COPY ./public ./public
+COPY ./app ./app
+
 # Building app
 RUN npm run build
 
