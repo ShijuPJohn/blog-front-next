@@ -1,17 +1,21 @@
-FROM node:16.14
+FROM node:alpine
 
-# Setting working directory. All the path will be relative to WORKDIR
-WORKDIR /app
+RUN mkdir -p /usr/src/app
+ENV PORT 3000
 
-# Copying source files
-COPY ./package.json ./package.json
-COPY ./node_modules ./node_modules
-COPY .next .next
-COPY ./public ./public
-COPY ./app ./app
+WORKDIR /usr/src/app
 
-# Building app
-RUN npm run build
+COPY package.json /usr/src/app
+COPY package-lock.json /usr/src/app
 
-# Running the app
-CMD [ "npm", "start"]
+# Production use node instead of root
+# USER node
+
+RUN npm install --production
+
+COPY . /usr/src/app
+
+RUN npm build
+
+EXPOSE 3000
+CMD [ "npm", "start" ]
