@@ -4,10 +4,10 @@ FROM node:16.14
 WORKDIR /app
 
 # Copying source files
-COPY --from=BUILD_IMAGE /app/package.json ./package.json
-COPY --from=BUILD_IMAGE /app/node_modules ./node_modules
-COPY --from=BUILD_IMAGE /app/.next ./.next
-COPY --from=BUILD_IMAGE /app/public ./public
+COPY /app/package.json ./package.json
+COPY /app/node_modules ./node_modules
+COPY /app/.next ./.next
+COPY /app/public ./public
 # Building app
 RUN npm run build
 
