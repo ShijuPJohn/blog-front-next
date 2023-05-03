@@ -6,7 +6,7 @@ WORKDIR /app
 # Copying source files
 COPY ./package.json ./package.json
 COPY ./node_modules ./node_modules
-COPY ./.next ./.next
+COPY .next .next
 COPY ./public ./public
 COPY ./app ./app
 
