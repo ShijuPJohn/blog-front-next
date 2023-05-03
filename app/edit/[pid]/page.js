@@ -112,7 +112,7 @@ function Page({params}) {
             console.log(data)
             const headers = {
                 'Content-Type': 'application/json',
-                'x-token': userInfo.token
+                'Authorization': 'Bearer '+userInfo.token
             }
             console.log("url", `${fetchURL}/posts/${pid}`)
             const response = await axios.put(`${fetchURL}/posts/${pid}`, data,
@@ -148,7 +148,7 @@ function Page({params}) {
         const config = {
             headers: {
                 'content-type': 'multipart/form-data',
-                'x-token': userInfo.token
+                'Authorization': 'Bearer '+userInfo.token
             },
         };
         const response = await axios.post(url, formData, config)

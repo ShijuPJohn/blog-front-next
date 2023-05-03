@@ -14,7 +14,7 @@
 }
 
 .post_title_text {
-    font-size: 2.4rem;
+    font-size: calc(1rem + 1vw);
     font-weight: 500;
     color: var(--text-black-dark);
     text-transform: uppercase;
@@ -43,11 +43,11 @@
 }
 
 .post_descr {
-    width: 100%;
+    width: 70%;
     padding: 2rem;
     color: var(--text-black-dark);
     font-size: 1.1rem;
-    line-height: 1.8rem;
+    line-height: 2rem;
 }
 
 .post_descr ul {
@@ -78,11 +78,17 @@
     .image_container {
         width: 70%;
     }
+    .post_descr{
+        width: 90%;
+    }
 }
 
 @media screen and (max-width: 760px) {
     .image_container {
         width: 85%;
+    }
+    .post_descr{
+        width: 100%;
     }
 }
 
@@ -90,4 +96,5 @@
     .image_container {
         width: 95%;
     }
+
 }

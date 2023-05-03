@@ -88,7 +88,7 @@ const Page = () => {
             };
             const headers = {
                 'Content-Type': 'application/json',
-                'x-token': userInfo.token
+                'Authorization': 'Bearer '+userInfo.token
             };
             let response = null;
             if (isSaved) {
@@ -135,7 +135,7 @@ const Page = () => {
         const config = {
             headers: {
                 'content-type': 'multipart/form-data',
-                'x-token': userInfo.token
+                'Authorization': 'Bearer '+userInfo.token
             },
         };
         const response = await axios.post(url, formData, config)

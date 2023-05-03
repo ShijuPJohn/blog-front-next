@@ -8,6 +8,7 @@ import PostCard from "@/app/post_card/post_card";
 import {CircularProgress} from "@mui/material";
 import jwt_decode from "jwt-decode";
 import {fetchURL} from "@/app/constants";
+import {enqueueSnackbar} from "notistack";
 
 
 function Page(props) {
@@ -46,11 +47,10 @@ function Page(props) {
             const config = {
                 headers: {
                     'content-type': 'multipart/form-data',
-                    'x-token': userInfo.token
+                    'Authorization': 'Bearer ' + userInfo.token
                 },
             };
             const response = await axios.get(url, config);
-            console.log(response)
             if (response.status !== 200) {
                 throw new Error('fetch error');
             }
@@ -62,17 +62,19 @@ function Page(props) {
     }, [])
 
     async function postDeleteFn(pid) {
-        const url = `http://localhost:8080/api/posts/${pid}`;
+        const url = `${fetchURL}/posts/${pid}`;
         const config = {
             headers: {
                 'content-type': 'multipart/form-data',
-                'x-token': userInfo.token
+                'Authorization': 'Bearer '+userInfo.token
             },
         };
         const response = await axios.delete(url, config);
-        console.log(response)
         if (response.status !== 200) {
+            enqueueSnackbar("Couldn't delete post", {variant: "error"})
             throw new Error('fetch error');
+        } else {
+            enqueueSnackbar("Post Deleted", {variant: "success"})
         }
         setPosts(prevState => prevState.filter(post => post.id !== pid));
     }
