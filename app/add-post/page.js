@@ -10,22 +10,36 @@ import axios from "axios";
 import Head from "next/head";
 import WEditor from "@/app/editor/wEditor";
 import Router from "next/router";
-import {categoriesData} from "@/app/constants";
+import {categoriesData, fetchURL} from "@/app/constants";
+import PhotoIcon from "@mui/icons-material/Photo";
+import DeleteIcon from "@mui/icons-material/Delete";
+import UndoIcon from "@mui/icons-material/Undo";
 
 
 const Page = () => {
     const userLogin = useSelector(state => state.user.user);
-    const {loading, userInfo} = userLogin
+    const {loading, userInfo} = userLogin;
     const router = useRouter();
     const dispatch = useDispatch();
     const {register, formState: {errors}, handleSubmit} = useForm();
     const [draft, setDraft] = useState(false);
+    const [archived, setArchived] = useState(false);
+    const [id, setId] = useState(0);
+    const [description, setDescription] = useState('');
+    const [title, setTitle] = useState('');
+    const [seoSlug, setSeoSlug] = useState('');
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [coverImageFile, setCoverImageFile] = useState();
     const [coverImageUrl, setCoverImageUrl] = useState('');
+    const [coverImageUrlLast, setCoverImageUrlLast] = useState('');
     const [isFetching, setIsFetching] = useState(false);
     const [contentHTML, setContentHTML] = useState('');
-    const [notSaved, setNotSaved] = useState(true)
+    const [notSaved, setNotSaved] = useState(true);
+    const [isSaved, setIsSaved] = useState(false);
+    const [savedPost, setSavedPost] = useState({});
+    useEffect(() => {
+        setNotSaved(true);
+    }, [contentHTML])
     useEffect(() => {
         const confirmationMessage = 'Changes you made may not be saved.';
         const beforeUnloadHandler = (e) => {
@@ -61,40 +75,57 @@ const Page = () => {
     }
 
 
-    const onSubmit = async (data) => {
+    async function onSubmit() {
         try {
-            setIsFetching(true)
-            data.draft = draft
-            data.archived = false
-            data.categories = selectedCategories
-            data.cover_image = coverImageUrl
-            data.description = contentHTML;
-            console.log(data)
+            console.log("here, trying")
+            const data = {
+                title,
+                draft,
+                archived,
+                seo_slug: seoSlug,
+                categories: selectedCategories,
+                cover_image: coverImageUrl,
+                description: contentHTML
+            };
+            console.log("generated object", data);
             const headers = {
                 'Content-Type': 'application/json',
                 'x-token': userInfo.token
+            };
+            let response = null;
+            console.log('is saved?', isSaved)
+            if (isSaved) {
+                console.log("post saved already")
+                response = await axios.put(`${fetchURL}/posts/${id}`, data,
+                    {headers});
+
+            } else {
+                response = await axios.post(`${fetchURL}/post`, data,
+                    {headers});
             }
-            const response = await axios.post("http://localhost:8080/api/post", data,
-                {headers})
-            console.log("Response", response)
-            setIsFetching(false)
-            if (response.status !== 201) {
-                router.push('/')
-                enqueueSnackbar('Failed to post', {variant: "error"});
+            if (response && response.status === 201) {
+                setIsSaved(true);
+                setNotSaved(false);
+                setId(response?.data?.post?.id)
+                if (!draft) {
+                    enqueueSnackbar('Post Published Successfully', {variant: "success"});
+                    router.push(`/posts/${response.data.post.seo_slug}`)
+                } else {
+                    enqueueSnackbar('Post Saved Successfully', {variant: "success"});
+                }
+            } else {
+                enqueueSnackbar('Failed to save', {variant: "error"});
             }
-            router.push(`/posts/${response.data.post.seo_slug}`)
-            enqueueSnackbar('Post Added Successfully', {variant: "success"});
         } catch (e) {
             setIsFetching(false)
             enqueueSnackbar('Failed to post. Try again', {variant: "error"});
         }
     }
 
-
     function handleChange(e) {
+        setNotSaved(true);
         setCoverImageFile(e.target.files[0])
     }
-
 
     async function handleCoverImageSubmit(event) {
         event.preventDefault()
@@ -114,6 +145,7 @@ const Page = () => {
         const response = await axios.post(url, formData, config)
 
         if (response.status === 201) {
+            setCoverImageUrlLast(coverImageUrl)
             setCoverImageUrl(response.data.url)
             enqueueSnackbar("Image uploaded", {variant: "success"})
         } else {
@@ -128,97 +160,116 @@ const Page = () => {
             <main className={styles.main}>
                 <h2 className={styles.signup_login_title}>Add Post</h2>
                 <div className={styles.main_container}>
-                    <form onSubmit={handleSubmit(onSubmit)} className={styles.add_post_form}>
-                        <TextField className={styles.text_input_field}
-                                   error={!!errors.title}
-                                   helperText={errors.title ? errors.title.message : null}
-                                   autoFocus
-                                   type={"text"}
-                                   label={"TITLE"}
-                                   variant={"outlined"}
-                                   {...register("title", {
-                                       required: "Required"
-                                   })}
-                        />
-                        {/*<TextField*/}
-                        {/*    className={styles.text_input_field}*/}
-                        {/*    error={!!errors.description}*/}
-                        {/*    type={"text"}*/}
-                        {/*    label={"CONTENT"}*/}
-                        {/*    variant={"outlined"}*/}
-                        {/*    {...register("description")}/>*/}
-                        <TextField
-                            className={styles.text_input_field}
-                            error={!!errors.seo_slug}
-                            type={"text"}
-                            label={"SEO SLUG"}
-                            variant={"outlined"}
-                            {...register("seo_slug")}/>
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={draft}
-                                    onChange={handleDraftChange}
-                                    name="checkedB"
-                                    color="primary"
-                                />
-                            }
-                            label="Mark as draft"
-                        />
-                        <div className={styles.tags_container}>
-                            {categoriesData.map(category => (
-                                <div key={category.id}
-                                     className={selectedCategories.includes(category.id) ? styles.tag_bubble_active : styles.tag_bubble}
-                                     onClick={() => {
-                                         if (selectedCategories.includes(category.id)) {
-                                             setSelectedCategories(prevState => prevState.filter(st => st !== category.id))
-                                         } else {
-                                             setSelectedCategories(prevState => [...prevState, category.id])
-                                         }
+                    <TextField className={styles.text_input_field}
+                               error={!!errors.title}
+                               helperText={errors.title ? errors.title.message : null}
+                               autoFocus
+                               type={"text"}
+                               label={"TITLE"}
+                               variant={"outlined"}
+                               onChange={e => {
+                                   setTitle(e.target.value);
+                                   setNotSaved(true);
+                               }}
+                               style={{margin: "1rem"}}
+                    />
+                    <TextField
+                        className={styles.text_input_field}
+                        error={!!errors.seo_slug}
+                        type={"text"}
+                        label={"SEO SLUG"}
+                        variant={"outlined"}
+                        onChange={e => {
+                            setSeoSlug(e.target.value)
+                            setNotSaved(true);
+                        }}
+                        style={{margin: "1rem"}}
+                    />
+
+                    <div className={styles.tags_container}>
+                        {categoriesData.map(category => (
+                            <div key={category.id}
+                                 className={selectedCategories.includes(category.id) ? styles.tag_bubble_active : styles.tag_bubble}
+                                 onClick={() => {
+                                     setNotSaved(true);
+                                     if (selectedCategories.includes(category.id)) {
+                                         setSelectedCategories(prevState => prevState.filter(st => st !== category.id))
+                                     } else {
+                                         setSelectedCategories(prevState => [...prevState, category.id])
                                      }
-                                     }>{category.name}</div>)
-                            )}
-                        </div>
-                        <div className={styles.file_upload_box}>
+                                 }
+                                 }>{category.name}</div>)
+                        )}
+                    </div>
+                    <div className={styles.file_upload_box}>
+                        <div className={styles.file_upload_btns_container}>
                             <label className={styles.custom_file_upload}>
-                                <input onChange={handleChange} type={"file"} className={styles.file_upload_inp}/>
-                                Select Cover Image
+                                <input onChange={handleChange} type={"file"}
+                                       className={styles.file_upload_inp}/>
+                                <PhotoIcon/>
                             </label>
-                            <span
-                                className={styles.cover_image_filename_label}>{coverImageFile ? coverImageFile.name : 'No file selected'}</span>
+                            <button className={styles.file_upload_delete_btn}
+                                    onClick={() => {
+                                        setCoverImageUrl('');
+                                        setCoverImageFile(null)
+                                    }
+                                    }
+                            >
+                                <DeleteIcon/>
+                            </button>
+                            <button className={styles.file_upload_delete_btn}
+                                    onClick={() => {
+                                        setCoverImageUrl(coverImageUrlLast);
+                                    }
+                                    }
+                            >
+                                <UndoIcon/>
+                            </button>
                         </div>
-                        <Button variant={"contained"} className={styles.image_upload_btn}
-                                onClick={handleCoverImageSubmit} disabled={!coverImageFile}>
-                            {isFetching ?
-                                <CircularProgress style={{color: "#FFF"}}/> : "Upload Image"}
-                        </Button>
-                        <div className={styles.img_preview_box}>
-                            {coverImageUrl && <img src={coverImageUrl}/>}
-                        </div>
+                        <span
+                            className={styles.cover_image_filename_label}>{coverImageFile ? coverImageFile.name : 'No file selected'}</span>
+                    </div>
+                    <Button variant={"contained"} className={styles.image_upload_btn}
+                            onClick={handleCoverImageSubmit} disabled={!coverImageFile}>
+                        {isFetching ?
+                            <CircularProgress style={{color: "#FFF"}}/> : "Upload Image"}
+                    </Button>
+                    <div className={styles.img_preview_box}>
+                        {coverImageUrl && <img src={coverImageUrl}/>}
+                    </div>
 
-                        <div className={styles.editor_container}>
-                            <WEditor updateHTMLFn={setContentHTML}/>
-                        </div>
-                        <div className={styles.content_text_container}>
-                            <TextField
-                                className={styles.content_text_container}
-                                multiline
-                                rows={10}
-                                value={contentHTML}
-                                onChange={(event) => {
-                                    setContentHTML(event.target.value)
-                                }
-                                }
+                    <div className={styles.editor_container}>
+                        <WEditor updateHTMLFn={setContentHTML}/>
+                    </div>
+                    <div className={styles.content_text_container}>
+                        <TextField
+                            className={styles.content_text_container}
+                            multiline
+                            rows={10}
+                            value={contentHTML}
+                            onChange={(event) => {
+                                setContentHTML(event.target.value)
+                            }
+                            }
+                        />
+                    </div>
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                checked={draft}
+                                onChange={handleDraftChange}
+                                name="checkedB"
+                                color="primary"
                             />
-                        </div>
+                        }
+                        label="Mark as draft"
+                    />
 
-
-                        <div className={styles.form_btn_container}>
-                            <Button className={styles.form_btn} variant={"contained"} type="submit"
-                                    disabled={isFetching}>{isFetching ?
-                                <CircularProgress size={"1.4rem"}/> : 'Submit'}</Button>
-                        </div>
-                    </form>
+                    <div className={styles.form_btn_container}>
+                        <Button className={styles.form_btn} variant={"contained"} onClick={onSubmit}
+                                disabled={isFetching}>{isFetching ?
+                            <CircularProgress size={"1.4rem"}/> : (draft ? 'Save' : 'Publish')}</Button>
+                    </div>
                 </div>
             </main>
         </>

@@ -1,7 +1,7 @@
 import styles from './page.module.css'
 import PostCard from "@/app/post_card/post_card";
 async function getPosts() {
-    const response = await fetch('http://localhost:8080/api/posts');
+    const response = await fetch('http://localhost:8080/api/posts',{ cache: 'no-store' });
 // ,{ cache: 'no-store' }
     if (!response.ok) {
         throw new Error('fetch error');

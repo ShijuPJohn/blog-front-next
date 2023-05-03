@@ -5,7 +5,7 @@ import parse from 'html-react-parser';
 import {fetchURL} from "@/app/constants";
 
 async function fetchPost(slug) {
-    const resp = await fetch(`${fetchURL}/post/byslug/${slug}`);
+    const resp = await fetch(`${fetchURL}/post/byslug/${slug}`,{ cache: 'no-store' });
     if (!resp.ok) {
         throw new Error("fetch error");
     }

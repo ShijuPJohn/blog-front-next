@@ -14,7 +14,7 @@ import {categoriesData, fetchURL} from "@/app/constants";
 import DeleteIcon from '@mui/icons-material/Delete';
 import UndoIcon from '@mui/icons-material/Undo';
 import PhotoIcon from '@mui/icons-material/Photo';
-
+let pid = -1;
 function Page({params}) {
     const userLogin = useSelector(state => state.user.user);
     const {loading, userInfo} = userLogin
@@ -36,6 +36,7 @@ function Page({params}) {
     const [notSaved, setNotSaved] = useState(true)
     const [post, setPost] = useState({});
     const [dataLoading, setDataLoading] = useState(false);
+
 
     useEffect(() => {
         const confirmationMessage = 'Changes you made may not be saved.';
@@ -64,7 +65,7 @@ function Page({params}) {
     useEffect(() => {
         setDataLoading(true);
         console.log(params.pid)
-        const pid = params.pid
+        pid = params.pid
         const url = `${fetchURL}/post/${pid}`
 
         async function fetchPost() {
@@ -113,19 +114,19 @@ function Page({params}) {
                 'Content-Type': 'application/json',
                 'x-token': userInfo.token
             }
-            const response = await axios.post("http://localhost:8080/api/post", data,
+            console.log("url", `${fetchURL}/posts/${pid}`)
+            const response = await axios.put(`${fetchURL}/posts/${pid}`, data,
                 {headers})
             console.log("Response", response)
             setIsFetching(false)
             if (response.status !== 201) {
                 router.push('/')
-                enqueueSnackbar('Failed to post', {variant: "error"});
+                enqueueSnackbar('Failed to update', {variant: "error"});
             }
-            router.push(`/posts/${response.data.post.seo_slug}`)
-            enqueueSnackbar('Post Added Successfully', {variant: "success"});
+            enqueueSnackbar('Post Updated Successfully', {variant: "success"});
         } catch (e) {
             setIsFetching(false)
-            enqueueSnackbar('Failed to post. Try again', {variant: "error"});
+            enqueueSnackbar('Failed to update. Try again', {variant: "error"});
         }
     }
 

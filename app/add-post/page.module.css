@@ -26,7 +26,7 @@
     align-items: center;
     justify-content: space-around;
     height: 100%;
-    width: 100%;
+    width: 70%;
 }
 
 .add_post_form {
@@ -43,7 +43,7 @@
 /*}*/
 
 .text_input_field {
-    margin: 1.0rem;
+    /*margin: 1rem;*/
     width: 90%;
 }
 
@@ -212,11 +212,17 @@
     color: darkred;
 }
 @media screen and (max-width: 600px) {
+    .tags_container{
+        width: 70%;
+    }
+    .text_input_field{
+        width: 70%;
+    }
+    .main_container{
+        width: 95%;
+    }
     .login_signup_form {
         width: 100%;
     }
 
-    .login_signup_form {
-        width: 95%;
-    }
 }
