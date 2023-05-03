@@ -139,7 +139,7 @@ function Page({params}) {
     async function handleCoverImageSubmit(event) {
         event.preventDefault()
         setIsFetching(true)
-        const url = 'http://localhost:8080/api/post/image-upload';
+        const url = `${fetchURL}/post/image-upload`;
         const formData = new FormData();
         formData.append('file', coverImageFile);
         formData.append('fileName', coverImageFile.name);

@@ -7,6 +7,7 @@ import axios from "axios";
 import PostCard from "@/app/post_card/post_card";
 import {CircularProgress} from "@mui/material";
 import jwt_decode from "jwt-decode";
+import {fetchURL} from "@/app/constants";
 
 
 function Page(props) {
@@ -41,7 +42,7 @@ function Page(props) {
     }, [userInfo]);
     useEffect(() => {
         async function fetchPosts() {
-            const url = 'http://localhost:8080/api/user/posts';
+            const url = `${fetchURL}/user/posts`;
             const config = {
                 headers: {
                     'content-type': 'multipart/form-data',

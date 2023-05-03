@@ -2,6 +2,7 @@ import {createSlice, combineReducers} from "@reduxjs/toolkit";
 import axios from "axios";
 import {HYDRATE} from "next-redux-wrapper";
 import {enqueueSnackbar} from "notistack";
+import {fetchURL} from "@/app/constants";
 
 function getFromLocalStorage() {
     try {
@@ -52,7 +53,7 @@ export const loginThunk = (email, password) => async (dispatch) => {
             }
         }
         const {data} = await axios.post(
-            "http://localhost:8080/api/users/login",
+            `${fetchURL}/users/login`,
             {email, password},
             config
         )
@@ -77,7 +78,7 @@ export const signupThunk = (username, email, password) => async (dispatch) => {
         }
         console.log(username)
         const {data} = await axios.post(
-            "http://localhost:8080/api/users",
+            `${fetchURL}/users`,
             {username, email, password},
             config
         )

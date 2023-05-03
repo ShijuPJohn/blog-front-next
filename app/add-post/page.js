@@ -77,7 +77,6 @@ const Page = () => {
 
     async function onSubmit() {
         try {
-            console.log("here, trying")
             const data = {
                 title,
                 draft,
@@ -87,15 +86,12 @@ const Page = () => {
                 cover_image: coverImageUrl,
                 description: contentHTML
             };
-            console.log("generated object", data);
             const headers = {
                 'Content-Type': 'application/json',
                 'x-token': userInfo.token
             };
             let response = null;
-            console.log('is saved?', isSaved)
             if (isSaved) {
-                console.log("post saved already")
                 response = await axios.put(`${fetchURL}/posts/${id}`, data,
                     {headers});
 
@@ -130,7 +126,7 @@ const Page = () => {
     async function handleCoverImageSubmit(event) {
         event.preventDefault()
         setIsFetching(true)
-        const url = 'http://localhost:8080/api/post/image-upload';
+        const url = `${fetchURL}/post/image-upload`;
         const formData = new FormData();
         formData.append('file', coverImageFile);
         formData.append('fileName', coverImageFile.name);
@@ -212,17 +208,13 @@ const Page = () => {
                                     onClick={() => {
                                         setCoverImageUrl('');
                                         setCoverImageFile(null)
-                                    }
-                                    }
-                            >
+                                    }}>
                                 <DeleteIcon/>
                             </button>
                             <button className={styles.file_upload_delete_btn}
                                     onClick={() => {
                                         setCoverImageUrl(coverImageUrlLast);
-                                    }
-                                    }
-                            >
+                                    }}>
                                 <UndoIcon/>
                             </button>
                         </div>
