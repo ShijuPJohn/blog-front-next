@@ -7,7 +7,7 @@ import {useRouter} from "next/navigation";
 import {useForm} from "react-hook-form";
 import {Button, Checkbox, CircularProgress, FormControlLabel, TextField} from "@mui/material";
 import axios from "axios";
-import WEditor from "@/app/editor/wEditor";
+// import WEditor from "@/app/editor/wEditor";
 import Router from "next/router";
 import {categoriesData, fetchURL} from "@/app/constants";
 import PhotoIcon from "@mui/icons-material/Photo";
@@ -227,9 +227,9 @@ const Page = () => {
                         {coverImageUrl && <img src={coverImageUrl}/>}
                     </div>
 
-                    <div className={styles.editor_container}>
-                        <WEditor updateHTMLFn={setContentHTML}/>
-                    </div>
+                    {/*<div className={styles.editor_container}>*/}
+                    {/*    <WEditor updateHTMLFn={setContentHTML}/>*/}
+                    {/*</div>*/}
                     <div className={styles.content_text_container}>
                         <TextField
                             className={styles.content_text_container}
