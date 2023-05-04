@@ -72,6 +72,11 @@
     height: 100%;
     object-fit: contain;
 }
+/*.post_descr code{*/
+/*    background-color: #515151;*/
+/*    padding: 1rem;*/
+/*    color: white;*/
+/*}*/
 
 @media screen and (max-width: 1200px) {
     .image_container {

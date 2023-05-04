@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './page.module.css'
-import sanitizeHtml from "sanitize-html-react";
 import parse from 'html-react-parser';
 import {fetchURL} from "@/app/constants";
 import Link from "next/link";
+import ContentBody from "@/app/content_body";
 
 async function fetchPost(slug) {
     const resp = await fetch(`${fetchURL}/post/byslug/${slug}`, {cache: 'no-store'});
@@ -15,6 +15,7 @@ async function fetchPost(slug) {
 }
 
 const Page = async ({params}) => {
+
     const post = await fetchPost(params.slug);
     return (
         <main className={styles.main}>
@@ -25,7 +26,7 @@ const Page = async ({params}) => {
             <div className={styles.image_container}>
                 <img src={post.cover_image} alt=""/>
             </div>
-            <div className={styles.post_descr}>{parse(post.description)}</div>
+            <ContentBody content={post.description}/>
         </main>
     );
 };

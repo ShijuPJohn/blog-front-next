@@ -31,7 +31,7 @@ function WEditor({initialHTML, updateHTMLFn}) {
                     const config = {
                         headers: {
                             'content-type': 'multipart/form-data',
-                            'Authorization': 'Bearer '+userInfo.token
+                            'Authorization': 'Bearer ' + userInfo.token
                         },
                     };
                     const response = await axios.post(url, formData, config)
