@@ -18,7 +18,7 @@ function Page(props) {
     const dispatch = useDispatch();
     const [posts, setPosts] = useState([]);
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const userInfoFromToken = jwt_decode(userInfo.token);
+    // const userInfoFromToken = jwt_decode(userInfo.token);
     // const {username, userid, useremail} = {
     //     username: userInfoFromToken.username,
     //     userid: userInfoFromToken.id,
