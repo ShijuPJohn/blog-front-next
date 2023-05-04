@@ -1,29 +1,27 @@
 'use client';
+
 import React, {useEffect, useState} from 'react';
 import styles from './page.module.css'
 import {useSelector} from "react-redux";
 import {enqueueSnackbar} from "notistack";
 import {useRouter} from "next/navigation";
-import {useForm} from "react-hook-form";
 import {Button, Checkbox, CircularProgress, FormControlLabel, TextField} from "@mui/material";
 import axios from "axios";
-import WEditor from "@/app/editor/wEditor";
-import Router from "next/router";
 import {categoriesData, fetchURL} from "@/app/constants";
 import PhotoIcon from "@mui/icons-material/Photo";
 import DeleteIcon from "@mui/icons-material/Delete";
 import UndoIcon from "@mui/icons-material/Undo";
 
+// import WEditor from "@/app/wEditor";
 
-const Page = () => {
+
+function Page() {
     const userLogin = useSelector(state => state.user.user);
     const {loading, userInfo} = userLogin;
     const router = useRouter();
-    const {register, formState: {errors}, handleSubmit} = useForm();
     const [draft, setDraft] = useState(false);
     const [archived, setArchived] = useState(false);
     const [id, setId] = useState(0);
-    const [description, setDescription] = useState('');
     const [title, setTitle] = useState('');
     const [seoSlug, setSeoSlug] = useState('');
     const [selectedCategories, setSelectedCategories] = useState([]);
@@ -32,35 +30,10 @@ const Page = () => {
     const [coverImageUrlLast, setCoverImageUrlLast] = useState('');
     const [isFetching, setIsFetching] = useState(false);
     const [contentHTML, setContentHTML] = useState('');
-    const [notSaved, setNotSaved] = useState(true);
-    const [isSaved, setIsSaved] = useState(false);
-    useEffect(() => {
-        setNotSaved(true);
-    }, [contentHTML])
-    useEffect(() => {
-        const confirmationMessage = 'Changes you made may not be saved.';
-        const beforeUnloadHandler = (e) => {
-            (e || window.event).returnValue = confirmationMessage;
-            return confirmationMessage; // Gecko + Webkit, Safari, Chrome etc.
-        };
-        const beforeRouteHandler = (url) => {
-            if (Router.pathname !== url && !confirm(confirmationMessage)) {
-                Router.events.emit('routeChangeError');
-                throw `Route change to "${url}" was aborted (this error can be safely ignored). See https://github.com/zeit/next.js/issues/2476.`;
-            }
-        };
-        if (notSaved) {
-            window.addEventListener('beforeunload', beforeUnloadHandler);
-            Router.events.on('routeChangeStart', beforeRouteHandler);
-        } else {
-            window.removeEventListener('beforeunload', beforeUnloadHandler);
-            Router.events.off('routeChangeStart', beforeRouteHandler);
-        }
-        return () => {
-            window.removeEventListener('beforeunload', beforeUnloadHandler);
-            Router.events.off('routeChangeStart', beforeRouteHandler);
-        };
-    }, [notSaved]);
+
+
+
+
     useEffect(() => {
         if (!(userInfo && Object.keys(userInfo).length !== 0)) {
             router.push('/')
@@ -74,6 +47,7 @@ const Page = () => {
 
     async function onSubmit() {
         try {
+            let response = null;
             const data = {
                 title,
                 draft,
@@ -85,24 +59,15 @@ const Page = () => {
             };
             const headers = {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer '+userInfo.token
+                'Authorization': 'Bearer ' + userInfo.token
             };
-            let response = null;
-            if (isSaved) {
-                response = await axios.put(`${fetchURL}/posts/${id}`, data,
-                    {headers});
-
-            } else {
-                response = await axios.post(`${fetchURL}/post`, data,
-                    {headers});
-            }
+            response = await axios.post(`${fetchURL}/post`, data,
+                {headers});
             if (response && response.status === 201) {
-                setIsSaved(true);
-                setNotSaved(false);
-                setId(response?.data?.post?.id)
+                router.push(`/edit/${response.data.post.id}`)
                 if (!draft) {
                     enqueueSnackbar('Post Published Successfully', {variant: "success"});
-                    router.push(`/posts/${response.data.post.seo_slug}`)
+                    // router.push(`/posts/${response.data.post.seo_slug}`)
                 } else {
                     enqueueSnackbar('Post Saved Successfully', {variant: "success"});
                 }
@@ -116,7 +81,6 @@ const Page = () => {
     }
 
     function handleChange(e) {
-        setNotSaved(true);
         setCoverImageFile(e.target.files[0])
     }
 
@@ -132,7 +96,7 @@ const Page = () => {
         const config = {
             headers: {
                 'content-type': 'multipart/form-data',
-                'Authorization': 'Bearer '+userInfo.token
+                'Authorization': 'Bearer ' + userInfo.token
             },
         };
         const response = await axios.post(url, formData, config)
@@ -154,27 +118,22 @@ const Page = () => {
                 <h2 className={styles.signup_login_title}>Add Post</h2>
                 <div className={styles.main_container}>
                     <TextField className={styles.text_input_field}
-                               error={!!errors.title}
-                               helperText={errors.title ? errors.title.message : null}
                                autoFocus
                                type={"text"}
                                label={"TITLE"}
                                variant={"outlined"}
                                onChange={e => {
                                    setTitle(e.target.value);
-                                   setNotSaved(true);
                                }}
                                style={{margin: "1rem"}}
                     />
                     <TextField
                         className={styles.text_input_field}
-                        error={!!errors.seo_slug}
                         type={"text"}
                         label={"SEO SLUG"}
                         variant={"outlined"}
                         onChange={e => {
                             setSeoSlug(e.target.value)
-                            setNotSaved(true);
                         }}
                         style={{margin: "1rem"}}
                     />
@@ -184,7 +143,6 @@ const Page = () => {
                             <div key={category.id}
                                  className={selectedCategories.includes(category.id) ? styles.tag_bubble_active : styles.tag_bubble}
                                  onClick={() => {
-                                     setNotSaved(true);
                                      if (selectedCategories.includes(category.id)) {
                                          setSelectedCategories(prevState => prevState.filter(st => st !== category.id))
                                      } else {
@@ -224,12 +182,12 @@ const Page = () => {
                             <CircularProgress style={{color: "#FFF"}}/> : "Upload Image"}
                     </Button>
                     <div className={styles.img_preview_box}>
-                        {coverImageUrl && <img src={coverImageUrl}/>}
+                        {coverImageUrl && <img src={coverImageUrl} alt={"post cover image"}/>}
                     </div>
 
-                    <div className={styles.editor_container}>
-                        <WEditor updateHTMLFn={setContentHTML}  initialHTML={null}/>
-                    </div>
+                    {/*<div className={styles.editor_container}>*/}
+                    {/*    <WEditor updateHTMLFn={setContentHTML} initialHTML={description}/>*/}
+                    {/*</div>*/}
                     <div className={styles.content_text_container}>
                         <TextField
                             className={styles.content_text_container}
@@ -238,9 +196,7 @@ const Page = () => {
                             value={contentHTML}
                             onChange={(event) => {
                                 setContentHTML(event.target.value)
-                            }
-                            }
-                        />
+                            }}/>
                     </div>
                     <FormControlLabel
                         control={
@@ -263,6 +219,6 @@ const Page = () => {
             </main>
         </>
     );
-};
+}
 
 export default Page;
