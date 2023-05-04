@@ -6,7 +6,7 @@ import {useRouter} from "next/navigation";
 import axios from "axios";
 import PostCard from "@/app/post_card/post_card";
 import {CircularProgress} from "@mui/material";
-import jwt_decode from "jwt-decode";
+// import jwt_decode from "jwt-decode";
 import {fetchURL} from "@/app/constants";
 import {enqueueSnackbar} from "notistack";
 
@@ -19,11 +19,11 @@ function Page(props) {
     const [posts, setPosts] = useState([]);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const userInfoFromToken = jwt_decode(userInfo.token);
-    const {username, userid, useremail} = {
-        username: userInfoFromToken.username,
-        userid: userInfoFromToken.id,
-        useremail: userInfoFromToken.email
-    };
+    // const {username, userid, useremail} = {
+    //     username: userInfoFromToken.username,
+    //     userid: userInfoFromToken.id,
+    //     useremail: userInfoFromToken.email
+    // };
 
     const handleDeleteClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -46,7 +46,7 @@ function Page(props) {
             const url = `${fetchURL}/user/posts`;
             const config = {
                 headers: {
-                    'content-type': 'multipart/form-data',
+                    'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + userInfo.token
                 },
             };
@@ -65,8 +65,8 @@ function Page(props) {
         const url = `${fetchURL}/posts/${pid}`;
         const config = {
             headers: {
-                'content-type': 'multipart/form-data',
-                'Authorization': 'Bearer '+userInfo.token
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer '+ userInfo.token
             },
         };
         const response = await axios.delete(url, config);
@@ -81,10 +81,10 @@ function Page(props) {
 
     return (
         <main className={styles.main}>
-            <div className={styles.info_block}>
-                <h2>{`Hello ${username}`}</h2>
-                <h3>{`email: ${useremail}`}</h3>
-            </div>
+            {/*<div className={styles.info_block}>*/}
+            {/*    <h2>{`Hello ${username}`}</h2>*/}
+            {/*    <h3>{`email: ${useremail}`}</h3>*/}
+            {/*</div>*/}
             {posts.length !== 0 ? posts.map(post => (
                 <PostCard post={post} createdDate={(new Date(post.time_created)).toLocaleDateString()} key={post.id}
                           postControls={true} deleteFn={postDeleteFn}/>

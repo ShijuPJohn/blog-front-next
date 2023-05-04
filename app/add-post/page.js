@@ -1,13 +1,12 @@
 'use client';
 import React, {useEffect, useState} from 'react';
 import styles from './page.module.css'
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {enqueueSnackbar} from "notistack";
 import {useRouter} from "next/navigation";
 import {useForm} from "react-hook-form";
 import {Button, Checkbox, CircularProgress, FormControlLabel, TextField} from "@mui/material";
 import axios from "axios";
-import Head from "next/head";
 import WEditor from "@/app/editor/wEditor";
 import Router from "next/router";
 import {categoriesData, fetchURL} from "@/app/constants";
@@ -20,7 +19,6 @@ const Page = () => {
     const userLogin = useSelector(state => state.user.user);
     const {loading, userInfo} = userLogin;
     const router = useRouter();
-    const dispatch = useDispatch();
     const {register, formState: {errors}, handleSubmit} = useForm();
     const [draft, setDraft] = useState(false);
     const [archived, setArchived] = useState(false);
@@ -36,7 +34,6 @@ const Page = () => {
     const [contentHTML, setContentHTML] = useState('');
     const [notSaved, setNotSaved] = useState(true);
     const [isSaved, setIsSaved] = useState(false);
-    const [savedPost, setSavedPost] = useState({});
     useEffect(() => {
         setNotSaved(true);
     }, [contentHTML])
