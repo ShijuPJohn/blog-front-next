@@ -25,20 +25,12 @@ const TopProgressBar = dynamic(
     },
     { ssr: false },
 );
-// export const metadata = {
-//     icons: {
-//         icon: '/favicon.png',
-//     },
-//     title:'ThinkPython'
-// };
 
 export default function RootLayout({children}) {
     return (
         <html lang="en" className={`${inter.variable} ${roboto.variable}`}>
-        {/*<head>*/}
-        {/*    <title>ThinkPython.dev</title>*/}
-
-        {/*</head>*/}
+        <head>
+        </head>
         <body>
         <TopProgressBar />
         <ComponentsWrapper>

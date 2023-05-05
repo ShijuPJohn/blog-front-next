@@ -49,7 +49,7 @@
 }
 
 .menu_btn {
-    display: none;
+    display: none!important;
 }
 
 .main_nav_links_item:hover,
@@ -86,7 +86,7 @@
     .menu_btn {
         color: white;
         margin-top: .4rem;
-        display: block;
+        display: block!important;
         z-index: 100;
     }
     .side_menu{
