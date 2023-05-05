@@ -9,12 +9,7 @@ async function getPosts() {
     }
     return await response.json();
 }
-export const metadata = {
-    icons: {
-        icon: '/favicon.png',
-    },
-    title:'ThinkPython'
-};
+
 
 export default async function Home() {
     const posts = await getPosts();

@@ -6,7 +6,7 @@
     background-color: var(--main-bg-color);
     padding: 1rem 3rem;
     border-radius: 10px;
-    height: 45vh;
+    /*height: 45vh;*/
 }
 
 .main_container {
@@ -29,7 +29,6 @@
 }
 
 .text_input_field {
-    margin: 1.0rem;
     width: 90%;
 }
 
@@ -71,6 +70,11 @@
 }
 
 @media screen and (max-width: 600px) {
+    .main {
+        margin: .5rem;
+        padding: 1rem .4rem;
+        width: 95%;
+    }
     .login_signup_form {
         width: 100%;
     }

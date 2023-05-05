@@ -43,6 +43,7 @@ const Page = () => {
                             autoComplete={"email"}
                             name={"email"}
                             label={"EMAIL"}
+                            style={{margin:"1rem"}}
                             variant={"outlined"}
                             {...register("email", {
                                 required: "Required",
@@ -60,6 +61,7 @@ const Page = () => {
                             type={"password"}
                             label={"PASSWORD"}
                             variant={"outlined"}
+                            style={{margin:"1rem"}}
                             {...register("password", {required: "Required"})}/>
                         <div className={styles.form_btn_container}>
                             <Button className={styles.form_btn} variant={"contained"} type="submit"

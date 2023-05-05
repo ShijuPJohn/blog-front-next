@@ -43,13 +43,6 @@ const Header = () => {
                     <img src="/logo.png" alt="logo"/>
                 </div>
             </Link>
-            {/*<div className={styles.main_nav_ham_btn} onClick={(event) => {*/}
-            {/*    setShowSidebar(existingVal => !existingVal);*/}
-            {/*}}>*/}
-            {/*    <div className={`${styles.line}`}></div>*/}
-            {/*    <div className={`${styles.line}`}></div>*/}
-            {/*    <div className={`${styles.line}`}></div>*/}
-            {/*</div>*/}
             <nav className={styles.main_nav}>
                 <Button className={styles.menu_btn} onClick={(event) => {
                     setShowSidebar(existingVal => !existingVal);

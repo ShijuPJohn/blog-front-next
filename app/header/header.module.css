@@ -1,5 +1,4 @@
 .header {
-    margin-right: 1rem;
     width: 100vw;
     height: calc(2rem + 3vw);
     background-color: var(--primary-color);

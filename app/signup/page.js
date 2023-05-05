@@ -27,7 +27,7 @@ const Page = () => {
     }, [userInfo])
 
     return (
-            <main className={styles.main} style={{height:"60vh"}}>
+            <main className={styles.main}>
                 <div className={styles.main_container}>
                     <h3 className={styles.signup_login_title}>Sign Up</h3>
                     <form onSubmit={handleSubmit(onSubmit)} className={styles.login_signup_form}>
@@ -39,6 +39,7 @@ const Page = () => {
                             type={"text"}
                             label={"USERNAME"}
                             variant={"outlined"}
+                            style={{margin:"1rem"}}
                             {...register("username", {required: "Required"})}/>
                         <TextField
                             className={styles.text_input_field}
@@ -49,6 +50,7 @@ const Page = () => {
                             name={"email"}
                             label={"EMAIL"}
                             variant={"outlined"}
+                            style={{margin:"1rem"}}
                             {...register("email", {
                                 required: "Required",
                                 pattern: {
@@ -65,6 +67,7 @@ const Page = () => {
                             type={"password"}
                             label={"PASSWORD"}
                             variant={"outlined"}
+                            style={{margin:"1rem"}}
                             {...register("password", {required: "Required"})}/>
                         <div className={styles.form_btn_container}>
                             <Button className={styles.form_btn} variant={"contained"} type="submit">Submit</Button>
