@@ -6,18 +6,20 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
 }
-.logo_box{
+
+.logo_box {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-left: 2rem;
 }
-.logo_box img{
+
+.logo_box img {
     height: calc(1.5rem + 1.2vw);
 }
-.logo_text{
+
+.logo_text {
     color: white;
     font-weight: 300;
 
@@ -25,7 +27,8 @@
 }
 
 .main_nav {
-
+    display: flex;
+    align-items: center;
 }
 
 
@@ -46,64 +49,61 @@
     cursor: pointer;
 }
 
+.menu_btn {
+    display: none;
+}
+
 .main_nav_links_item:hover,
 .main_nav_links_item:active {
     color: var(--secondary-color);
 }
+.side_menu{
+    position: absolute;
+    top: calc(2rem + 3vw);
+    right: 0;
+    height: 100vh;
+    background-color: var(--primary-color);
+    width: 50%;
+    display: none;
+    z-index: 100;
+}
 
-@media screen and (max-width: 768px) {
-    .header {
-        position: absolute;
-        top: 0;
-        left: 100vw;
-        height: 100vh;
-        width: 50vw;
-        transform-origin: left;
-        transition: all .5s;
-        justify-content: center;
-    }
-    .logo_box{
-        visibility: hidden;
-    }
-    .logo_box img{
-    }
+.side_nav_ul{
+    display: none;
+    list-style: none;
+}
+.side_menu_hidden{
+    display: none;
+}
 
-    .main_nav_ham_btn {
-        width: 3rem;
-        height: 3rem;
-        position: fixed;
-        top: 1rem;
-        right: 1rem;
-        cursor: pointer;
-        background-color: teal;
-        border-radius: 50%;
+@media screen and (max-width: 600px) {
+    .main_nav_links {
+        display: none;
+    }
+    .main_nav {
+        display: flex;
+        align-items: center;
+    }
+    .menu_btn {
+        color: white;
+        margin-top: .4rem;
+        display: block;
+        z-index: 100;
+    }
+    .side_menu{
+        display: block;
+    }
+    .show{
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
         align-items: center;
-        padding: .6rem;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        justify-content: center;
     }
-
-    .line {
-        width: 80%;
-        height: .2rem;
-        background-color: white;
-        border-radius: .2rem;
-        transition: all .4s ease-in;
+    .side_nav_ul{
+        display: block;
     }
-
-    .show {
-        left: 50vw;
-        top: 0;
-        height: 100vh;
-        width: 50vw;
-    }
-
-    .main_nav_links {
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        min-height: 50vh;
+    .main_nav_links_item {
+        margin: 1rem;
+        font-size: .9rem;
     }
 }

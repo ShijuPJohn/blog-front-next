@@ -65,11 +65,15 @@
     .post_card_root {
         flex-direction: column;
         align-items: center;
-        height: 25rem;
+        width: 100%;
+        /*height: 25rem;*/
     }
 
     .image_container {
-        width: auto;
-        height: 40%;
+        width: 70%;
+        height: 60%;
+    }
+    .text_container{
+        overflow-y: hidden;
     }
 }

@@ -39,7 +39,7 @@
 .image_container img {
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .post_descr {
@@ -94,11 +94,17 @@
 }
 
 @media screen and (max-width: 760px) {
+    .main{
+        width: 98%;
+        padding: 1rem 0;
+        margin: .4rem 0;
+    }
     .image_container {
         width: 85%;
     }
     .post_descr{
         width: 100%;
+        padding: .5rem;
     }
 }
 
