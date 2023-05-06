@@ -3,8 +3,11 @@ import React, {useEffect} from 'react';
 import styles from './posts/[slug]/page.module.css'
 import parse from "html-react-parser";
 import Prism from "prismjs";
-import './prism.css'
-import ReactMarkdown from "react-markdown";
+import 'prismjs/themes/prism-okaidia.css'
+import 'prismjs/components/prism-jsx.js'
+import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
+import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
+import 'prismjs/components/prism-python.min.js'
 
 function ContentBody({content}) {
     useEffect(() => {
@@ -13,6 +16,7 @@ function ContentBody({content}) {
     return (
         <>
             <div className={styles.post_descr}>{parse(content)}</div>
+            {/*<div className={styles.post_descr} dangerouslySetInnerHTML={{ __html:content }} />*/}
 
         </>);
 }

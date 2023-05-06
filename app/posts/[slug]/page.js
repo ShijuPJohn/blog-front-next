@@ -6,6 +6,7 @@ import ContentBody from "@/app/content_body";
 import Head from "next/head";
 import {NextSeo} from "next-seo";
 
+
 async function fetchPost(slug) {
     const resp = await fetch(`${fetchURL}/post/byslug/${slug}`, {cache: 'no-store'});
     if (!resp.ok) {
