@@ -7,6 +7,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Link from "next/link";
 import Prism from "prismjs";
+import 'prismjs/themes/prism-okaidia.css'
+import 'prismjs/components/prism-jsx.js'
+import 'prismjs/components/prism-python.min.js'
+import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
+import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
 
 const PostCard = ({post, createdDate, postControls, deleteFn}) => {
     const [open, setOpen] = useState(false);

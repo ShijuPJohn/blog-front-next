@@ -43,7 +43,7 @@
 }
 
 .post_descr {
-    width: 70%;
+    width: 65%;
     padding: 2rem;
     color: var(--text-black-dark);
     font-size: 1.1rem;
@@ -103,7 +103,7 @@
         width: 85%;
     }
     .post_descr{
-        width: 100%;
+        width: 98%;
         padding: .5rem;
     }
 }
