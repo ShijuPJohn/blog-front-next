@@ -7,6 +7,7 @@ import {useRouter} from "next/navigation";
 import {enqueueSnackbar} from 'notistack';
 import {useForm} from "react-hook-form";
 import {Button, TextField} from "@mui/material";
+import Link from "next/link";
 
 const Page = () => {
     const userLogin = useSelector(state => state.user.user);
@@ -27,6 +28,13 @@ const Page = () => {
     }, [userInfo])
 
     return (
+        <>
+            <title>Signup | ThinkPython.dev</title>
+            <meta
+                name="description"
+                content="Create an account with email and password | ThinkPython.dev"
+            />
+            <link rel="shortcut icon" href="/favicon.png" type="image/x-icon"/>
             <main className={styles.main}>
                 <div className={styles.main_container}>
                     <h3 className={styles.signup_login_title}>Sign Up</h3>
@@ -39,7 +47,7 @@ const Page = () => {
                             type={"text"}
                             label={"USERNAME"}
                             variant={"outlined"}
-                            style={{margin:"1rem"}}
+                            style={{margin: "1rem"}}
                             {...register("username", {required: "Required"})}/>
                         <TextField
                             className={styles.text_input_field}
@@ -50,7 +58,7 @@ const Page = () => {
                             name={"email"}
                             label={"EMAIL"}
                             variant={"outlined"}
-                            style={{margin:"1rem"}}
+                            style={{margin: "1rem"}}
                             {...register("email", {
                                 required: "Required",
                                 pattern: {
@@ -67,7 +75,7 @@ const Page = () => {
                             type={"password"}
                             label={"PASSWORD"}
                             variant={"outlined"}
-                            style={{margin:"1rem"}}
+                            style={{margin: "1rem"}}
                             {...register("password", {required: "Required"})}/>
                         <div className={styles.form_btn_container}>
                             <Button className={styles.form_btn} variant={"contained"} type="submit">Submit</Button>
@@ -75,9 +83,10 @@ const Page = () => {
                         </div>
                     </form>
                     <div className={styles.grey_line}></div>
-                    <a href="/login"><p className={styles.create_acc_login}>Login with email and password?</p></a>
+                    <Link href="/login"><p className={styles.create_acc_login}>Login with email and password?</p></Link>
                 </div>
             </main>
+        </>
     );
 };
 

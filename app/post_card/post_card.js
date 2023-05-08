@@ -1,17 +1,10 @@
 'use client';
 import React, {useEffect, useState} from 'react';
 import styles from "@/app/post_card/post_card.module.css";
-import parse from "html-react-parser";
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Link from "next/link";
-import Prism from "prismjs";
-import 'prismjs/themes/prism-okaidia.css'
-import 'prismjs/components/prism-jsx.js'
-import 'prismjs/components/prism-python.min.js'
-import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
-import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
 
 const PostCard = ({post, createdDate, postControls, deleteFn}) => {
     const [open, setOpen] = useState(false);
@@ -28,10 +21,6 @@ const PostCard = ({post, createdDate, postControls, deleteFn}) => {
         handleClose();
         deleteFn(post.id);
     }
-    useEffect(() => {
-        Prism.highlightAll();
-    }, []);
-
     return (
         <>
             <Dialog
@@ -67,7 +56,7 @@ const PostCard = ({post, createdDate, postControls, deleteFn}) => {
                             <p className={styles.post_meta_info}>{post.author.username} | {createdDate}</p>
                         </div>
                     </Link>
-                    <div className={styles.post_excerpt}>{parse(post.description.slice(0, 100))}</div>
+                    <div className={styles.post_excerpt}>{post.meta_description}</div>
                 </div>
                 {postControls && <div className={styles.controls_box}>
                     <div onClick={handleClickOpen} className={styles.post_controls_btn}>

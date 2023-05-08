@@ -64,11 +64,7 @@ const Header = () => {
                         <li className={styles.main_nav_links_item}><Link href="/login">Login</Link></li>}
                 </ul>
 
-                <div className={showSidebar ? `${styles.side_menu} ${styles.show}` : `${styles.side_menu_hidden}`}
-                     onfocusout={() => {
-                         setShowSidebar(false)
-                     }
-                     }>
+                <div className={showSidebar ? `${styles.side_menu} ${styles.show}` : `${styles.side_menu_hidden}`}>
                     <ul className={styles.side_nav_ul}>
                         {userInfo && Object.keys(userInfo).length !== 0 ?
                             <>

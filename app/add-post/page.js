@@ -24,14 +24,14 @@ function Page() {
     const [id, setId] = useState(0);
     const [title, setTitle] = useState('');
     const [seoSlug, setSeoSlug] = useState('');
+    const [metaDescription, setMetaDescription] = useState('');
+
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [coverImageFile, setCoverImageFile] = useState();
     const [coverImageUrl, setCoverImageUrl] = useState('');
     const [coverImageUrlLast, setCoverImageUrlLast] = useState('');
     const [isFetching, setIsFetching] = useState(false);
     const [contentHTML, setContentHTML] = useState('');
-
-
 
 
     useEffect(() => {
@@ -55,7 +55,8 @@ function Page() {
                 seo_slug: seoSlug,
                 categories: selectedCategories,
                 cover_image: coverImageUrl,
-                description: contentHTML
+                description: contentHTML,
+                meta_description: metaDescription
             };
             const headers = {
                 'Content-Type': 'application/json',
@@ -137,6 +138,18 @@ function Page() {
                         }}
                         style={{margin: "1rem"}}
                     />
+                    <TextField
+                        className={styles.text_input_field}
+                        type={"text"}
+                        label={"META DESCRIPTION"}
+                        variant={"outlined"}
+                        multiline
+                        rows={3}
+                        onChange={e => {
+                            setMetaDescription(e.target.value)
+                        }}
+                        style={{margin: "1rem"}}
+                    />
 
                     <div className={styles.tags_container}>
                         {categoriesData.map(category => (
@@ -181,7 +194,7 @@ function Page() {
                         {isFetching ?
                             <CircularProgress style={{color: "#FFF"}}/> : "Upload Image"}
                     </Button>
-                    <div className={styles.img_preview_box}>
+                    <div className={styles.img_preview_box} style={{margin:"1rem"}}>
                         {coverImageUrl && <img src={coverImageUrl} alt={"post cover image"}/>}
                     </div>
 
@@ -190,7 +203,8 @@ function Page() {
                     {/*</div>*/}
                     <div className={styles.content_text_container}>
                         <TextField
-                            className={styles.content_text_container}
+                            className={styles.content_text_field}
+                            label={"EDIT CONTENT BODY"}
                             multiline
                             rows={10}
                             value={contentHTML}
