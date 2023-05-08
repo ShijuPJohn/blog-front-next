@@ -15,15 +15,29 @@ async function fetchPost(slug) {
     const post = await resp.json();
     return post;
 }
-//
-// export const metadata = {
-//     title: 'something',
-// };
+
+export const metadata = {
+    icons: {
+        icon: '/favicon.png',
+    },
+};
 const Page = async ({params}) => {
     const post = await fetchPost(params.slug);
     return (
         <>
             <title>{`${post.title} | ThinkPython.dev`}</title>
+            <meta
+                name="description"
+                content={post.meta_description}
+            />
+            <meta
+                property="og:description"
+                content={post.meta_description}
+            />
+            <meta
+                property="og:image"
+                content={post.cover_image}
+            />
             <main className={styles.main}>
                 <h1 className={styles.post_title_text}><Link href={`/posts/${params.slug}`}>{post.title}</Link></h1>
                 <div className={styles.post_meta_container}>

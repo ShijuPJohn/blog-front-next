@@ -8,22 +8,30 @@ export const fetchURL = cloudAPI
 export const categoriesData = [
     {
         "id": 1,
-        "name": "java"
-    },
-    {
-        "id": 2,
         "name": "python"
     },
     {
+        "id": 2,
+        "name": "flask"
+    },
+    {
         "id": 3,
-        "name": "javascript"
+        "name": "object oriented programming"
     },
     {
         "id": 4,
-        "name": "reactjs"
+        "name": "functional programming"
     },
     {
         "id": 5,
-        "name": "flask"
+        "name": "decorators"
+    },
+    {
+        "id": 6,
+        "name": "beginners tutorial"
+    },
+    {
+        "id": 7,
+        "name": "web development"
     }
 ]

@@ -22,6 +22,7 @@ function Page({params}) {
     const dispatch = useDispatch();
     // const {register, formState: {errors}, handleSubmit} = useForm();
     const [draft, setDraft] = useState(false);
+    const [metaDescription, setMetaDescription] = useState('');
     const [archived, setArchived] = useState(false);
     const [id, setId] = useState(0);
     const [description, setDescription] = useState('');
@@ -64,7 +65,6 @@ function Page({params}) {
     }, [notSaved]);
     useEffect(() => {
         setDataLoading(true);
-        console.log(params.pid)
         pid = params.pid
         const url = `${fetchURL}/post/${pid}`
 
@@ -76,17 +76,17 @@ function Page({params}) {
             }
             const data = await response.json()
             setTitle(data.title);
-            setDescription(data.description)
-            setSeoSlug(data.seo_slug)
-            setSelectedCategories(data.categories.map(cat => cat.id))
-            setDraft(data.draft)
-            console.log(data)
-            setDataLoading(false)
-            setCoverImageUrl(data.cover_image)
-            setCoverImageOriginalUrl(data.cover_image)
+            setDescription(data.description);
+            setSeoSlug(data.seo_slug);
+            setSelectedCategories(data.categories.map(cat => cat.id));
+            setDraft(data.draft);
+            setDataLoading(false);
+            setCoverImageUrl(data.cover_image);
+            setCoverImageOriginalUrl(data.cover_image);
+            setMetaDescription(data.meta_description);
         }
 
-        fetchPost()
+        fetchPost();
 
     }, [])
     useEffect(() => {
@@ -96,7 +96,7 @@ function Page({params}) {
     }, [userInfo])
 
     function handleDraftChange(event, value) {
-        setDraft(pval => !pval)
+        setDraft(pval => !pval);
     }
 
     const onSubmit = async () => {
@@ -107,17 +107,15 @@ function Page({params}) {
                 archived,
                 categories: selectedCategories,
                 cover_image: coverImageUrl,
-                description: contentHTML
+                description: contentHTML,
+                meta_description: metaDescription
             };
-            console.log(data)
             const headers = {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer '+userInfo.token
             }
-            console.log("url", `${fetchURL}/posts/${pid}`)
             const response = await axios.put(`${fetchURL}/posts/${pid}`, data,
                 {headers})
-            console.log("Response", response)
             setIsFetching(false)
             if (response.status !== 201) {
                 router.push('/')
@@ -143,8 +141,6 @@ function Page({params}) {
         const formData = new FormData();
         formData.append('file', coverImageFile);
         formData.append('fileName', coverImageFile.name);
-        console.log(coverImageFile)
-        console.log(coverImageFile.name)
         const config = {
             headers: {
                 'content-type': 'multipart/form-data',
@@ -179,7 +175,8 @@ function Page({params}) {
                                        autoFocus
                                        type={"text"}
                                        label={"TITLE"}
-                                       variant={"outlined"}/>
+                                       variant={"outlined"}
+                                       style={{margin: "1rem"}}/>
 
                             <TextField
                                 className={styles.text_input_field}
@@ -190,16 +187,22 @@ function Page({params}) {
                                 onChange={e => {
                                     setSeoSlug(e.target.value)
                                 }}
+                                style={{margin: "1rem"}}
                             />
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        checked={draft}
-                                        onChange={handleDraftChange}
-                                        name="checkedB"
-                                        color="primary"/>
-                                }
-                                label="Mark as draft"/>
+                            <TextField
+                                className={styles.text_input_field}
+                                type={"text"}
+                                label={"META DESCRIPTION"}
+                                variant={"outlined"}
+                                value={metaDescription}
+                                multiline
+                                rows={3}
+                                onChange={e => {
+                                    setMetaDescription(e.target.value)
+                                }}
+                                style={{margin: "1rem"}}
+                            />
+
 
                             <div className={styles.tags_container}>
                                 {categoriesData.map(category => (
@@ -266,6 +269,15 @@ function Page({params}) {
                                     }
                                 />
                             </div>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={draft}
+                                        onChange={handleDraftChange}
+                                        name="checkedB"
+                                        color="primary"/>
+                                }
+                                label="Mark as draft"/>
 
                             <div className={styles.form_btn_container}>
                                 <Button className={styles.form_btn} variant={"contained"}
