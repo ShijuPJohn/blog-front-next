@@ -37,6 +37,11 @@ body {
     overflow-x: hidden;
 }
 
+*::selection {
+    color: white;
+    background-color: #368686;
+}
+
 a:link,
 a:visited {
     text-decoration: none;
@@ -48,6 +53,7 @@ a:visited {
     color: darkred;
     cursor: pointer;
 }
+
 input[type="file"] {
     display: none;
 }
