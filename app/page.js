@@ -16,7 +16,7 @@ export const metadata = {
     icons: {
         icon: '/favicon.png',
     },
-    title: 'ThinkPython.dev'
+    title: 'Programmation.dev'
 };
 
 export default async function Home() {
