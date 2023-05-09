@@ -14,7 +14,9 @@ import {categoriesData, fetchURL} from "@/app/constants";
 import DeleteIcon from '@mui/icons-material/Delete';
 import UndoIcon from '@mui/icons-material/Undo';
 import PhotoIcon from '@mui/icons-material/Photo';
+
 let pid = -1;
+
 function Page({params}) {
     const userLogin = useSelector(state => state.user.user);
     const {loading, userInfo} = userLogin
@@ -75,6 +77,7 @@ function Page({params}) {
                 router.push('/dashboard')
             }
             const data = await response.json()
+            setId(data.id)
             setTitle(data.title);
             setDescription(data.description);
             setSeoSlug(data.seo_slug);
@@ -112,7 +115,7 @@ function Page({params}) {
             };
             const headers = {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer '+userInfo.token
+                'Authorization': 'Bearer ' + userInfo.token
             }
             const response = await axios.put(`${fetchURL}/posts/${pid}`, data,
                 {headers})
@@ -144,7 +147,7 @@ function Page({params}) {
         const config = {
             headers: {
                 'content-type': 'multipart/form-data',
-                'Authorization': 'Bearer '+userInfo.token
+                'Authorization': 'Bearer ' + userInfo.token
             },
         };
         const response = await axios.post(url, formData, config)
@@ -164,7 +167,7 @@ function Page({params}) {
 
                 {dataLoading ? <h1>Loading...</h1> :
                     <>
-                        <h2 className={styles.signup_login_title}>Update Post</h2>
+                        <h2 className={styles.signup_login_title}>Edit Post #{id}</h2>
                         <div className={styles.main_container}>
                             {/*<form onSubmit={handleSubmit(onSubmit)} className={styles.add_post_form}>*/}
                             <TextField className={styles.text_input_field}
