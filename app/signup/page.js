@@ -29,10 +29,10 @@ const Page = () => {
 
     return (
         <>
-            <title>Signup | ThinkPython.dev</title>
+            <title>Signup | Programmation.dev</title>
             <meta
                 name="description"
-                content="Create an account with email and password | ThinkPython.dev"
+                content="Create an account with email and password | Programmation.dev"
             />
             <link rel="shortcut icon" href="/favicon.png" type="image/x-icon"/>
             <main className={styles.main}>

@@ -34,10 +34,10 @@ const Page = () => {
 
     return (
         <>
-            <title>Login | ThinkPython.dev</title>
+            <title>Login | Programmation.dev</title>
             <meta
                 name="description"
-                content="Log in to user account | ThinkPython.dev"
+                content="Log in to user account | Programmation.dev"
             />
             <link rel="shortcut icon" href="/favicon.png" type="image/x-icon"/>
             <main className={styles.main}>

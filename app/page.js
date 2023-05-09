@@ -16,12 +16,12 @@ export const metadata = {
     icons: {
         icon: '/favicon.png',
     },
-    title: 'ThinkPython.dev'
+    title: 'Programmation.dev'
 };
 
 export default async function Home() {
     const posts = await getPosts();
-    const metaDescr = "Here you will find a ton of resources to help you master this powerful and versatile programming language, including step-by-step tutorials, and expert tips."
+    const metaDescr = "A programming blog featuring high-quality tutorials and articles on popular languages and emerging technologies."
     return (
         <>
             <meta

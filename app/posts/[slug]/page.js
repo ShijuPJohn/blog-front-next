@@ -25,7 +25,7 @@ const Page = async ({params}) => {
     const post = await fetchPost(params.slug);
     return (
         <>
-            <title>{`${post.title} | ThinkPython.dev`}</title>
+            <title>{`${post.title} | Programmation.dev`}</title>
             <meta
                 name="description"
                 content={post.meta_description}
