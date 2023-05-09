@@ -7,7 +7,6 @@
     margin: 1rem 1rem;
     padding: 1rem;
     display: flex;
-    height: 15rem;
 }
 
 .image_container {
@@ -34,14 +33,14 @@
 }
 
 .text_container_title {
-    font-size: calc(.9rem + .5vw);
-    font-weight: 500;
+    font-size: calc(1rem + .5vw);
+    font-weight: 600;
     color: var(--text-black-dark);
     text-transform: uppercase;
 }
 
 .post_excerpt {
-    font-size: .8rem;
+    font-size: calc(.6rem + .3vw);
     color: var(--text-black-light1);
     margin-top: 1.3rem;
 }
@@ -67,9 +66,6 @@
     }
 }
 @media screen and (max-width: 900px) {
-    .post_card_root{
-        width: 100%;
-    }
     .image_container {
         width: 80%;
         height: 80%;
@@ -81,7 +77,6 @@
     .post_card_root {
         flex-direction: column;
         align-items: center;
-        width: 100%;
     }
 
     .image_container {
@@ -90,8 +85,9 @@
     }
     .text_container{
         overflow-y: hidden;
+        width: 95%;
     }
     .post_excerpt {
-        margin-top: 0;
+        margin-top: .5rem;
     }
 }

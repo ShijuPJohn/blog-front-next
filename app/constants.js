@@ -16,22 +16,46 @@ export const categoriesData = [
     },
     {
         "id": 3,
-        "name": "object oriented programming"
+        "name": "django"
     },
     {
         "id": 4,
-        "name": "functional programming"
+        "name": "fast api"
     },
     {
         "id": 5,
-        "name": "decorators"
+        "name": "web development"
     },
     {
         "id": 6,
-        "name": "beginners tutorial"
+        "name": "object oriented programming"
     },
     {
         "id": 7,
-        "name": "web development"
+        "name": "functional programming"
+    },
+    {
+        "id": 8,
+        "name": "tutorial"
+    },
+    {
+        "id": 9,
+        "name": "quiz"
+    },
+    {
+        "id": 10,
+        "name": "iterators"
+    },
+    {
+        "id": 11,
+        "name": "generators"
+    },
+    {
+        "id": 12,
+        "name": "data structures"
+    },
+    {
+        "id": 13,
+        "name": "algorithms"
     }
 ]

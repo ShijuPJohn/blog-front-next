@@ -106,6 +106,9 @@
         width: 98%;
         padding: .5rem;
     }
+    .post_title_text{
+        margin: .2rem .8rem;
+    }
 }
 
 @media screen and (max-width: 600px) {

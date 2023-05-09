@@ -47,6 +47,7 @@ function Page() {
 
     async function onSubmit() {
         try {
+            setIsFetching(true)
             let response = null;
             const data = {
                 title,
@@ -66,15 +67,18 @@ function Page() {
                 {headers});
             if (response && response.status === 201) {
                 router.push(`/edit/${response.data.post.id}`)
-                if (!draft) {
-                    enqueueSnackbar('Post Published Successfully', {variant: "success"});
+                if (response.data.message === "approval_pending") {
+                    enqueueSnackbar('Post submitted for admin approval. You can continue editing.', {variant: "success"});
+                } else if (!draft) {
+                    enqueueSnackbar('Post Published Successfully. You can continue editing.', {variant: "success"});
                     // router.push(`/posts/${response.data.post.seo_slug}`)
                 } else {
-                    enqueueSnackbar('Post Saved Successfully', {variant: "success"});
+                    enqueueSnackbar('Post Saved Successfully. You can continue editing.', {variant: "success"});
                 }
             } else {
                 enqueueSnackbar('Failed to save', {variant: "error"});
             }
+            setIsFetching(false)
         } catch (e) {
             setIsFetching(false)
             enqueueSnackbar('Failed to post. Try again', {variant: "error"});
@@ -92,8 +96,6 @@ function Page() {
         const formData = new FormData();
         formData.append('file', coverImageFile);
         formData.append('fileName', coverImageFile.name);
-        console.log(coverImageFile)
-        console.log(coverImageFile.name)
         const config = {
             headers: {
                 'content-type': 'multipart/form-data',
@@ -194,7 +196,7 @@ function Page() {
                         {isFetching ?
                             <CircularProgress style={{color: "#FFF"}}/> : "Upload Image"}
                     </Button>
-                    <div className={styles.img_preview_box} style={{margin:"1rem"}}>
+                    <div className={styles.img_preview_box} style={{margin: "1rem"}}>
                         {coverImageUrl && <img src={coverImageUrl} alt={"post cover image"}/>}
                     </div>
 
