@@ -1,18 +1,18 @@
 <xml version="1.0" encoding="UTF-8">
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
         <url>
-            <loc>https://thinkpython.dev/</loc>
-            <lastmod>2023-05-08T17:19:36+01:00</lastmod>
+            <loc>https://programmation.dev/</loc>
+            <lastmod>2023-05-10</lastmod>
             <priority>1.0</priority>
         </url>
         <url>
-            <loc>https://thinkpython.dev/login</loc>
-            <lastmod>2023-05-05</lastmod>
+            <loc>https://programmation.dev/login</loc>
+            <lastmod>2023-05-10</lastmod>
             <priority>0.5</priority>
         </url>
         <url>
-            <loc>https://thinkpython.dev/signup</loc>
-            <lastmod>2023-05-05</lastmod>
+            <loc>https://programmation.dev/signup</loc>
+            <lastmod>2023-05-10</lastmod>
             <priority>0.5</priority>
         </url>
         <!--    <url>-->
