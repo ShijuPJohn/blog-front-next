@@ -42,11 +42,11 @@
 .post_excerpt {
     font-size: calc(.6rem + .3vw);
     color: var(--text-black-light1);
-    margin-top: 1.3rem;
+    margin-top: 1rem;
 }
 
 .post_meta_container {
-    margin-top: .5rem;
+    margin-top: .8rem;
     font-size: .8rem;
     color: var(--text-black-light2);
 }
@@ -54,17 +54,20 @@
 .post_meta_info {
 
 }
-.post_controls_btn{
+
+.post_controls_btn {
     color: #962525;
     border: none;
     cursor: pointer;
     margin: 2rem .5rem;
 }
+
 @media screen and (max-width: 1100px) {
-    .post_card_root{
+    .post_card_root {
         width: 100%;
     }
 }
+
 @media screen and (max-width: 900px) {
     .image_container {
         width: 80%;
@@ -73,20 +76,28 @@
 
 
 }
+
 @media screen and (max-width: 760px) {
     .post_card_root {
         flex-direction: column;
         align-items: center;
     }
 
+    .post_meta_container {
+    margin-top: .5rem;
+    }
+
+
     .image_container {
         width: 50%;
         height: 60%;
     }
-    .text_container{
+
+    .text_container {
         overflow-y: hidden;
         width: 95%;
     }
+
     .post_excerpt {
         margin-top: .5rem;
     }
