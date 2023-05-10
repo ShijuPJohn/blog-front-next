@@ -18,7 +18,7 @@
 .author_image_box img {
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .author_text_box {
@@ -50,15 +50,21 @@
 @media screen and (max-width: 900px) {
 
     .author_box {
-        width: 90%;
+        width: 80%;
     }
-    .author_image_box {
-        flex-basis: 60%;
-    }
+
 }
 
 @media screen and (max-width: 760px) {
     .author_box {
         width: 98%;
+    }
+}
+@media screen and (max-width: 600px) {
+    .author_box {
+        width: 95%;
+    }
+    .author_image_box {
+        flex-basis: 60%;
     }
 }
