@@ -8,54 +8,78 @@ export const fetchURL = cloudAPI
 export const categoriesData = [
     {
         "id": 1,
-        "name": "python"
+        "name": "Python"
     },
     {
         "id": 2,
-        "name": "flask"
+        "name": "Flask"
     },
     {
         "id": 3,
-        "name": "django"
+        "name": "Django"
     },
     {
         "id": 4,
-        "name": "fast api"
+        "name": "Javascript"
     },
     {
         "id": 5,
-        "name": "web development"
+        "name": "ReactJS"
     },
     {
         "id": 6,
-        "name": "object oriented programming"
+        "name": "NextJS"
     },
     {
         "id": 7,
-        "name": "functional programming"
+        "name": "NodeJS"
     },
     {
         "id": 8,
-        "name": "tutorial"
+        "name": "Object Oriented Programming"
     },
     {
         "id": 9,
-        "name": "quiz"
+        "name": "Functional Programming"
     },
     {
         "id": 10,
-        "name": "iterators"
+        "name": "Algorithms"
     },
     {
         "id": 11,
-        "name": "generators"
+        "name": "Data Structures"
     },
     {
         "id": 12,
-        "name": "data structures"
+        "name": "CSS"
     },
     {
         "id": 13,
-        "name": "algorithms"
+        "name": "Web Development"
+    },
+    {
+        "id": 14,
+        "name": "Frontend Development"
+    },
+    {
+        "id": 15,
+        "name": "Backend Development"
+    },
+    {
+        "id": 16,
+        "name": "Artificial Intelligence"
+    },
+    {
+        "id": 17,
+        "name": "Machine Learning"
+    },
+    {
+        "id": 18,
+        "name": "Data Science"
+    },
+    {
+        "id": 19,
+        "name": "Statistics"
     }
 ]
