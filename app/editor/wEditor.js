@@ -78,7 +78,7 @@ function WEditor({initialHTML, updateHTMLFn}) {
     }, [editor]);
     i18nChangeLanguage('en');
     const editorStyle = {
-        height: '500px',
+        height: '650px',
         overflowY: 'hidden',
         scrollY: true,
         fontSize: '1rem'

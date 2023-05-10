@@ -3,8 +3,10 @@ import styles from './page.module.css'
 import {fetchURL} from "@/app/constants";
 import Link from "next/link";
 import ContentBody from "@/app/content_body";
+
 import Head from "next/head";
 import {NextSeo} from "next-seo";
+import AuthorBox from "@/app/author-box/author_box";
 
 
 async function fetchPost(slug) {
@@ -41,12 +43,10 @@ const Page = async ({params}) => {
             <main className={styles.main}>
                 <h1 className={styles.post_title_text}><Link href={`/posts/${params.slug}`}>{post.title}</Link></h1>
                 <div className={styles.post_meta_container}>
-                    <p className={styles.post_meta_info}>{post.author.username} | {(new Date(post.time_created)).toLocaleDateString()}</p>
-                </div>
-                <div className={styles.image_container}>
-                    <img src={post.cover_image} alt=""/>
+                    <p className={styles.post_meta_info}>{(new Date(post.time_created)).toLocaleDateString()}</p>
                 </div>
                 <ContentBody content={post.description}/>
+                <AuthorBox author={post.author}/>
             </main>
         </>
     );

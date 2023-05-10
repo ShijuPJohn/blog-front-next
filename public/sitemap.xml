@@ -15,10 +15,10 @@
             <lastmod>2023-05-10</lastmod>
             <priority>0.5</priority>
         </url>
-        <!--    <url>-->
-        <!--        <loc>https://thinkpython.dev/posts/should-you-start-learning-react12</loc>-->
-        <!--        <lastmod>2023-05-08T17:19:36+01:00</lastmod>-->
-        <!--        <priority>1.0</priority>-->
-        <!--    </url>-->
+        <url>
+            <loc>https://programmation.dev/posts/iterators-and-generators-in-python</loc>
+            <lastmod>2023-05-10</lastmod>
+            <priority>1.0</priority>
+        </url>
     </urlset>
 </xml>
