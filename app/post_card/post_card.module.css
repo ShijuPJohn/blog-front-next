@@ -1,5 +1,6 @@
 .post_card_root {
     width: 80%;
+
     border-style: solid;
     border-width: 1px;
     border-radius: 10px;
@@ -14,12 +15,18 @@
     margin-right: 1rem;
     flex-basis: 25%;
     flex-grow: 1;
+    height: 12rem;
+    padding: .5rem;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    color: #74a9c5;
 }
 
 .image_container img {
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .text_container {
