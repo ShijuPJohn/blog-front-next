@@ -6,7 +6,6 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
 function AuthorBox({author}) {
-    console.log(author)
     return (
         <div className={styles.author_box}>
             <div className={styles.author_image_box}>

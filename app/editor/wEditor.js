@@ -37,7 +37,6 @@ function WEditor({initialHTML, updateHTMLFn}) {
                     const response = await axios.post(url, formData, config)
 
                     if (response.status === 201) {
-                        console.log(response)
                         insertFn(response.data.url)
                         enqueueSnackbar("Image uploaded", {variant: "success"})
                     } else {
