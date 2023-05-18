@@ -47,16 +47,16 @@
 
 .post_descr h2 {
     font-size: 2rem;
-    margin: .6rem 0;
+    margin-top: 2.5rem;
 }
 
 .post_descr h3 {
     font-size: 1.2rem;
-    margin: .5rem 0;
+    margin-top: 1.5rem;
 }
 
 .post_descr h4 {
-    margin: .8rem 0;
+    margin-top: 1.2rem;
 }
 
 .post_descr img {

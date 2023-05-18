@@ -9,7 +9,6 @@ const store = configureStore({
 })
 export default store
 store.subscribe(() => {
-    console.log(store.getState())
     localStorage.setItem('store', JSON.stringify(store.getState()))
 })
 export const wrapper = createWrapper(store)

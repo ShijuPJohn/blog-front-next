@@ -68,7 +68,6 @@ export const loginThunk = (email, password) => async (dispatch) => {
 
 export const signupThunk = (username, email, password) => async (dispatch) => {
     try {
-        console.log(username, email, password)
         dispatch(loginRequest())
         const config = {
             headers: {
@@ -76,7 +75,6 @@ export const signupThunk = (username, email, password) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         }
-        console.log(username)
         const {data} = await axios.post(
             `${fetchURL}/users`,
             {username, email, password},
