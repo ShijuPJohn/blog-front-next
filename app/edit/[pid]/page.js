@@ -108,6 +108,7 @@ function Page({params}) {
                 title,
                 draft,
                 archived,
+                seo_slug:seoSlug,
                 categories: selectedCategories,
                 cover_image: coverImageUrl,
                 description: contentHTML,
