@@ -18,8 +18,8 @@ export const metadata = {
     },
     title: 'Programmation.dev'
 };
-
 export default async function Home() {
+
     const posts = await getPosts();
     const metaDescr = "A programming blog featuring high-quality tutorials and articles on popular languages and emerging technologies."
     return (

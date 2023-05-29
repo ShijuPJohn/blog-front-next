@@ -1,0 +1,21 @@
+.comment_box_root{
+    width: 65%;
+}
+@media screen and (max-width: 900px) {
+
+    .comment_box_root {
+        width: 80%;
+    }
+
+}
+
+@media screen and (max-width: 760px) {
+    .comment_box_root {
+        width: 98%;
+    }
+}
+@media screen and (max-width: 600px) {
+    .comment_box_root {
+        width: 95%;
+    }
+}

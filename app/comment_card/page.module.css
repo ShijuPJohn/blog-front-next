@@ -1,0 +1,29 @@
+.comment_card_root_box {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: var(--border-grey);
+    padding: .6rem;
+    margin: .5rem 0;
+    width: 100%;
+
+}
+
+.comment_card_author_name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #24a285;
+}
+
+.comment_card_comment {
+    font-size: 1.1rem;
+    color: var(--text-black-light1);
+    margin: .5rem 0;
+}
+
+.comment_card_time {
+    font-size: .8rem;
+    font-weight: 200;
+    color: #c39813;
+
+}

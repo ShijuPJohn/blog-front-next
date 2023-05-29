@@ -7,6 +7,7 @@ import ContentBody from "@/app/content_body";
 import Head from "next/head";
 import {NextSeo} from "next-seo";
 import AuthorBox from "@/app/author-box/author_box";
+import CommentBox from "@/app/comments_box/comment_box";
 
 
 async function fetchPost(slug) {
@@ -47,6 +48,7 @@ const Page = async ({params}) => {
                 </div>
                 <ContentBody content={post.description}/>
                 <AuthorBox author={post.author}/>
+                <CommentBox postId={post.id}/>
             </main>
         </>
     );

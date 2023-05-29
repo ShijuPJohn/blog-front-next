@@ -19,23 +19,26 @@ const Header = () => {
     const {userInfo} = userLogin
     const dispatch = useDispatch();
     useEffect(() => {
+        document.body.scrollTop
         setHydrated(true);
     }, []);
 
     useEffect(() => {
         setShowSidebar(false)
     }, [router.asPath])
-    useEffect(()=>{
-        if (showSidebar){
-            setTimeout(()=>{
+    useEffect(() => {
+
+        if (showSidebar) {
+            setTimeout(() => {
                 setShowSidebar(false)
-            },5000)
+            }, 5000)
         }
-    },[showSidebar])
+    }, [showSidebar])
 
     if (!hydrated) {
         return null;
     }
+
     return (
         <header className={styles.header}>
             <Link href={"/"}>
