@@ -1,0 +1,40 @@
+.comment_add_box {
+    border-style: solid;
+    border-width: 3px;
+    border-color: #d19a9a;
+    border-radius: 5px;
+    width: 100%;
+    padding: 1rem;
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.comment_add_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.text_input_field .email_field .name_field{
+    line-height: 1rem;
+}
+.text_input_field {
+    width: 100%;
+}
+.comment_name_email_box{
+    width: 100%;
+    display: flex;
+}
+.name_field{
+    flex: 1;
+}
+.email_field{
+    flex: 1;
+}
+.form_btn {
+    /*width: 10rem;*/
+}

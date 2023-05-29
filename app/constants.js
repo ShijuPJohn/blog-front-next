@@ -1,7 +1,3 @@
-export const USER_LOGIN_REQUEST = "USER_LOGIN_REQUEST"
-export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS"
-export const USER_LOGIN_FAIL = "USER_LOGIN_FAIL"
-export const USER_LOGOUT = "USER_LOGOUT"
 const localAPI = "http://localhost:8080/api"
 const cloudAPI = "https://blog-backend-flask-rfzj7peyoa-uc.a.run.app/api"
 export const fetchURL = cloudAPI
@@ -44,31 +40,31 @@ export const categoriesData = [
     },
     {
         "id": 10,
-        "name": "Algorithms"
+        "name": "HTML"
     },
     {
         "id": 11,
-        "name": "Data Structures"
-    },
-    {
-        "id": 12,
         "name": "CSS"
     },
     {
+        "id": 12,
+        "name": "Algorithms"
+    },
+    {
         "id": 13,
-        "name": "Web Development"
+        "name": "Data Structures"
     },
     {
         "id": 14,
-        "name": "Frontend Development"
+        "name": "Web Development"
     },
     {
         "id": 15,
-        "name": "Backend Development"
+        "name": "Frontend Development"
     },
     {
         "id": 16,
-        "name": "Artificial Intelligence"
+        "name": "Backend Development"
     },
     {
         "id": 17,
@@ -76,10 +72,46 @@ export const categoriesData = [
     },
     {
         "id": 18,
-        "name": "Data Science"
+        "name": "Statistics"
     },
     {
         "id": 19,
-        "name": "Statistics"
+        "name": "Linear Algebra"
+    },
+    {
+        "id": 20,
+        "name": "Responsive Design"
+    },
+    {
+        "id": 21,
+        "name": "SASS"
+    },
+    {
+        "id": 22,
+        "name": "ChatGPT"
+    },
+    {
+        "id": 23,
+        "name": "Google Bard"
+    },
+    {
+        "id": 24,
+        "name": "Microsoft Bing"
+    },
+    {
+        "id": 25,
+        "name": "Artificial Intelligence"
+    },
+    {
+        "id": 26,
+        "name": "Deep Learning"
+    },
+    {
+        "id": 27,
+        "name": "Reinforcement Learning"
+    },
+    {
+        "id": 28,
+        "name": "Natural Language Processing"
     }
 ]
