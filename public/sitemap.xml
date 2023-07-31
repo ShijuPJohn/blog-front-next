@@ -3,27 +3,22 @@
     <url>
         <loc>https://programmation.dev/</loc>
         <lastmod>2023-05-10</lastmod>
-        <priority>1.0</priority>
     </url>
     <url>
         <loc>https://programmation.dev/login</loc>
         <lastmod>2023-05-10</lastmod>
-        <priority>0.5</priority>
     </url>
     <url>
         <loc>https://programmation.dev/signup</loc>
         <lastmod>2023-05-10</lastmod>
-        <priority>0.5</priority>
     </url>
     <url>
         <loc>https://programmation.dev/posts/iterators-and-generators-in-python</loc>
-        <lastmod>2023-05-10</lastmod>
-        <priority>1.0</priority>
+        <lastmod>2023-07-31</lastmod>
     </url>
     <url>
         <loc>https://programmation.dev/posts/javascript-array-methods</loc>
-        <lastmod>2023-05-19</lastmod>
-        <priority>1.0</priority>
+        <lastmod>2023-07-31</lastmod>
     </url>
 </urlset>
 
