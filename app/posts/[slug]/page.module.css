@@ -14,13 +14,15 @@
 }
 
 .post_title_text {
-    font-size: calc(1rem + 1.5vw);
+    font-size: calc(.7rem + 1.5vw);
     font-weight: 500;
     color: var(--text-black-dark);
     text-transform: uppercase;
     padding-bottom: .4rem;
     border-bottom: solid;
     border-color: #b43b7a;
+    text-align: center;
+    width: 65%;
 }
 
 .post_meta_container {
@@ -76,7 +78,7 @@
         width: 70%;
     }
 
-    .post_descr {
+    .post_title_text, .post_descr {
         width: 90%;
     }
 }
@@ -92,7 +94,7 @@
         width: 85%;
     }
 
-    .post_descr {
+    .post_title_text, .post_descr {
         width: 98%;
         padding: .5rem;
     }
