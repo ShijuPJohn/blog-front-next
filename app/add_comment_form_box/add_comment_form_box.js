@@ -26,7 +26,7 @@ function AddCommentFormBox({postId, addCommentFunction}) {
     return (
         <div className={styles.comment_add_box}>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.comment_add_form}>
-
+                <h3 className={styles.comment_add_box_title}>Add a comment</h3>
                 <div className={styles.comment_name_email_box}>
                     <TextField
                         className={styles.name_field}
