@@ -12,7 +12,8 @@ function CommentBox({postId}) {
     const [isCommentsFetching, setIsCommentsFetching] = useState(false)
     const [comments, setComments] = useState([])
     useEffect(() => {
-    }, [comments])
+        fetchComments();
+    }, [])
 
     async function fetchComments() {
         setIsCommentsFetching(true);
@@ -27,13 +28,6 @@ function CommentBox({postId}) {
 
     return (
         <div className={styles.comment_box_root}>
-            <Waypoint
-                onEnter={() => {
-                    if (!commentsFetched) {
-                        fetchComments();
-                    }
-                }
-                }/>
             {isCommentsFetching ? <CircularProgress/> :
                 <>
                     <AddCommentFormBox postId={postId} addCommentFunction={setComments}/>

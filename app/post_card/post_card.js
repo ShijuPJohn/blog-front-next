@@ -46,7 +46,7 @@ const PostCard = ({post, createdDate, postControls, deleteFn}) => {
             </Dialog>
             <div className={styles.post_card_root}>
                 <div className={styles.image_container}>
-                    <Link href={`/posts/${post.seo_slug}`}><img src={post.cover_image} alt=""/> </Link>
+                        <Link href={`/posts/${post.seo_slug}`}><img src={post.cover_image} alt=""/> </Link>
                 </div>
                 <div className={styles.text_container}>
                     <Link href={`/posts/${post.seo_slug}`}>
