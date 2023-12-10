@@ -28,7 +28,7 @@ const Page = async ({params}) => {
     const post = await fetchPost(params.slug);
     return (
         <>
-            <title>{`${post.title} | Programmation.dev`}</title>
+        <title>{`${post.title} | PROGRAMMATION.dev`}</title>
             <meta
                 name="description"
                 content={post.meta_description}

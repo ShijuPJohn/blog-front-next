@@ -16,7 +16,7 @@ export const metadata = {
     icons: {
         icon: '/favicon.png',
     },
-    title: 'Programmation.dev'
+    title: 'PROGRAMMATION.dev'
 };
 export default async function Home() {
 

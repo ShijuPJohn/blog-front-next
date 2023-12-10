@@ -15,7 +15,7 @@
 }
 
 .logo_box img {
-    height: calc(1.5rem + 1.2vw);
+    height: calc(1.2rem + 1.1vw);
 }
 
 .logo_text {
@@ -84,7 +84,7 @@
         align-items: center;
     }
     .logo_box{
-        margin-left: .6rem;
+        margin-left: 1rem;
     }
     .menu_btn {
         color: white;
