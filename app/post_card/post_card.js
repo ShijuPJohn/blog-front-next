@@ -56,7 +56,7 @@ const PostCard = ({post, createdDate, postControls, deleteFn}) => {
                             <p className={styles.post_meta_info}>{post.author.username} | {createdDate}</p>
                         </div>
                     </Link>
-                    <div className={styles.post_excerpt}>{post.meta_description}</div>
+                    <Link href={`/posts/${post.seo_slug}`}><div className={styles.post_excerpt}>{post.meta_description.slice(0,200)+'...'}</div></Link>
                 </div>
                 {postControls && <div className={styles.controls_box}>
                     <div onClick={handleClickOpen} className={styles.post_controls_btn}>

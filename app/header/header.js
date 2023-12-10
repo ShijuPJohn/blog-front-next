@@ -43,7 +43,7 @@ const Header = () => {
         <header className={styles.header}>
             <Link href={"/"}>
                 <div className={styles.logo_box}>
-                    <img src="/logo.png" alt="logo"/>
+                    <img src="/logo3.png" alt="logo"/>
                 </div>
             </Link>
             <nav className={styles.main_nav}>

@@ -50,6 +50,7 @@
     font-size: calc(.7rem + .3vw);
     color: var(--text-black-light1);
     margin-top: 1rem;
+    line-height: 1.2rem;
 }
 
 .post_meta_container {
@@ -107,5 +108,6 @@
 
     .post_excerpt {
         margin-top: .5rem;
+        line-height: 1.1rem;
     }
 }

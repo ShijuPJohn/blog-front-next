@@ -85,7 +85,7 @@
 
 @media screen and (max-width: 760px) {
     .main {
-        width: 98%;
+        width: 100%;
         padding: 1rem 0;
         margin: .4rem 0;
     }
