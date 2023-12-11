@@ -1,6 +1,6 @@
 'use client';
 import React, {useEffect, useState} from 'react';
-import styles from "@/app/post_card/post_card.module.css";
+import styles from "@/app/post_card/page.module.css";
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';

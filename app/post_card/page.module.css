@@ -40,10 +40,12 @@
 }
 
 .text_container_title {
-    font-size: calc(1rem + .5vw);
-    font-weight: 600;
-    color: var(--text-black-dark);
+    font-size: calc(1rem + .3vw);
+    font-weight: 400;
     text-transform: uppercase;
+    color: #b98900;
+    font-family: "Roboto",sans-serif;
+    margin-bottom: 1rem;
 }
 
 .post_excerpt {
