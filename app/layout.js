@@ -29,8 +29,8 @@ const TopProgressBar = dynamic(
 export default function RootLayout({children}) {
     return (
         <html lang="en" className={`${inter.variable} ${roboto.variable}`}>
-        <head>
-        </head>
+        {/*<head>*/}
+        {/*</head>*/}
         <body>
         <TopProgressBar />
         <ComponentsWrapper>
