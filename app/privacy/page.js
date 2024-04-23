@@ -8,7 +8,7 @@ const Page = ({params}) => {
             <>
                 <title>Privacy Policy | PROGRAMMATION.dev</title>
                 <main className={styles.main}>
-                    <h1 className={styles.post_title_text}><Link href={`/posts/${params.slug}`}>{post.title}</Link></h1>
+                    <h1 className={styles.post_title_text}>Privacy Policy</h1>
                 </main>
             </>
     );
