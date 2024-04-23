@@ -3,7 +3,7 @@ import './page.module.css';
 import styles from "@/app/posts/[slug]/page.module.css";
 import Link from "next/link";
 
-const Page = () => {
+const Page = ({params}) => {
     return (
             <>
                 <title>Privacy Policy | PROGRAMMATION.dev</title>
