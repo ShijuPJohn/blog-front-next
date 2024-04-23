@@ -2,7 +2,6 @@
 import React, {useEffect, useState} from 'react';
 import styles from './page.module.css'
 import {fetchURL} from "@/app/constants";
-import {Waypoint} from "react-waypoint";
 import {CircularProgress} from "@mui/material";
 import CommentCard from "@/app/comment_card/comment_card";
 import AddCommentFormBox from "@/app/add_comment_form_box/add_comment_form_box";
@@ -28,15 +27,10 @@ function CommentBox({postId}) {
 
     return (
         <div className={styles.comment_box_root}>
-            {isCommentsFetching ? <CircularProgress/> :
-                <>
                     <AddCommentFormBox postId={postId} addCommentFunction={setComments}/>
                     {comments.map((comment => (
                         <CommentCard key={comment.id} comment={comment}/>
                     )))}
-                </>
-            }
-
         </div>
     );
 }

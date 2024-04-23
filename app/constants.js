@@ -113,5 +113,25 @@ export const categoriesData = [
     {
         "id": 28,
         "name": "Natural Language Processing"
+    },
+    {
+        "id": 29,
+        "name": "Golang"
+    },
+    {
+        "id": 30,
+        "name": "Go"
+    },
+    {
+        "id": 31,
+        "name": "Programming"
+    },
+    {
+        "id": 32,
+        "name": "Programming Language"
+    },
+    {
+        "id": 33,
+        "name": "Cheatsheet"
     }
 ]

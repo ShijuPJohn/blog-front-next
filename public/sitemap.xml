@@ -36,5 +36,9 @@
         <loc>https://programmation.dev/posts/how-to-make-a-website-responsive-basics</loc>
         <lastmod>2023-12-10</lastmod>
     </url>
+    <url>
+        <loc>http://localhost:3000/posts/web-backend-using-expressjs-mongodb</loc>
+        <lastmod>2023-12-12</lastmod>
+    </url>
 </urlset>
 

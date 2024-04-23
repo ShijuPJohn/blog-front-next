@@ -34,7 +34,6 @@
     "react-hook-form": "^7.43.9",
     "react-markdown": "^8.0.7",
     "react-redux": "^8.0.5",
-    "react-waypoint": "^10.3.0",
     "sanitize-html-react": "^1.13.0",
     "styled-components": "^5.3.9",
     "uuid": "^9.0.0"
