@@ -7,7 +7,7 @@ function Footer() {
     return (
         <footer className={styles.footer_root}>
             <div className={styles.copyright_box}>
-                &copy; 2023 programmation.dev. All rights reserved.
+                &copy; 2023 <a href="/">programmation.dev.</a> All rights reserved.
             </div>
             <div className={styles.about_privacy_links_box}>
                 <li><Link href="/about">About</Link></li>
