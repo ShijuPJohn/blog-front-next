@@ -89,6 +89,12 @@
         padding: 1rem 0;
         margin: .4rem 0;
     }
+    .main li{
+        margin-left: 1rem;
+    }
+    .post_descr code{
+        font-size: .8rem;
+    }
 
     .image_container {
         width: 85%;
@@ -97,7 +103,7 @@
     .post_descr {
         width: 98%;
         padding: .5rem;
-        font-size: .9rem;
+        font-size: 1.1rem;
     }
 
     .post_title_text {
