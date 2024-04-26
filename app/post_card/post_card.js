@@ -46,17 +46,17 @@ const PostCard = ({post, createdDate, postControls, deleteFn}) => {
             </Dialog>
             <div className={styles.post_card_root}>
                 <div className={styles.image_container}>
-                        <Link href={`/posts/${post.seo_slug}`}><img src={post.cover_image} alt=""/> </Link>
+                        <Link href={`/posts/${post.seo_slug}`}  scroll={false}><img src={post.cover_image} alt=""/> </Link>
                 </div>
                 <div className={styles.text_container}>
-                    <Link href={`/posts/${post.seo_slug}`}>
+                    <Link href={`/posts/${post.seo_slug}`} scroll={false}>
                         <h3 className={styles.text_container_title}>{post.title}</h3>
 
                         <div className={styles.post_meta_container}>
                             <p className={styles.post_meta_info}>{post.author.username} | {createdDate}</p>
                         </div>
                     </Link>
-                    <Link href={`/posts/${post.seo_slug}`}><div className={styles.post_excerpt}>{post.meta_description.slice(0,200)+'...'}</div></Link>
+                    <Link href={`/posts/${post.seo_slug}`}  scroll={false}><div className={styles.post_excerpt}>{post.meta_description.slice(0,200)+'...'}</div></Link>
                 </div>
                 {postControls && <div className={styles.controls_box}>
                     <div onClick={handleClickOpen} className={styles.post_controls_btn}>

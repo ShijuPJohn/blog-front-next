@@ -8,6 +8,7 @@ import Head from "next/head";
 import {NextSeo} from "next-seo";
 import AuthorBox from "@/app/author-box/author_box";
 import CommentBox from "@/app/comments_box/comment_box";
+import ScrollUp from "@/app/ScrollFix/ScrollUp";
 
 
 async function fetchPost(slug) {
@@ -28,6 +29,7 @@ const Page = async ({params}) => {
     const post = await fetchPost(params.slug);
     return (
         <>
+            <ScrollUp/>
         <title>{`${post.title} | PROGRAMMATION.dev`}</title>
             <meta
                 name="description"

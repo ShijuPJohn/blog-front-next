@@ -19,7 +19,6 @@ const Header = () => {
     const {userInfo} = userLogin
     const dispatch = useDispatch();
     useEffect(() => {
-        document.body.scrollTop
         setHydrated(true);
     }, []);
 
